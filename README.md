@@ -102,8 +102,8 @@ addz_test( 13 );
 
 ####4. Console Output
 
-The output of **doctest()** depends on the value of option **mode**. For example,
-`mode=13`, which is the full display of everything (See section **Doctest Modes** for details), gives this:
+The output of **doctest()** depends on the value of option `mode`. For example,
+`mode=13` (type in this form: `["mode",13]`) , which is the full display of everything (See section **Doctest Modes** for details), gives this:
 
 ```java
 -------------------------------------------------------
