@@ -307,16 +307,14 @@ dt_type ( x )=str
 
 ####13. Release Note
 
-1. **OpenSCAD_DocTest** is built on OpenSCAD 2014.03.11, in which some nice
+1. **OpenSCAD_DocTest** is built on **OpenSCAD** *2014.03.11*, in which some nice
 newer features like list comprehension, var assignment in function, etc,
 are not available. Therefore, many functions are made available through
 extensive recursive and/or repetive calls of itself or some other 
 functions. That could be a factor for its slowness.
 
 2. Newer version of **OpenSCAD_DocTest** will take advantages of those new
-features of OpenSCAD, which probably won't be available until the end of 
-2014. At this moment, this version will most likely not add new features or 
-improvements but bugfix. Still, comments or suggestions are always welcome.
+features of **OpenSCAD**. As usual, comments or suggestions are welcome.
 
 3. The author would like to express appreciation for the help from OpenSCAD 
 community in http://forum.openscad.org/ to make this release come true. 
