@@ -46,12 +46,12 @@ behaves as expected.
 ####3. Quick Look
 
 Example function: 
-```
+```java
 function addz(p,z)= [p.x, p.y, p.z+z];
 ```
 a. Write doc:
 
-```javascript
+```java
 addz=[ "addz"   // function name
      , "p,z"    // arg names
      , "array"  // return type
@@ -62,7 +62,7 @@ addz=[ "addz"   // function name
 
 b. Write test:  [ arg_string, result, expected] 
   
-```
+```java
 module addz_test( mode=13 )
 {
    addz_tests=
@@ -77,7 +77,7 @@ module addz_test( mode=13 )
 ```
    Or use local scope for variables:
 
-```
+```java
 module addz_test( mode=13 )
 {
    pt=[3,4,5];   // define test variables
@@ -88,14 +88,14 @@ module addz_test( mode=13 )
    doctest( addz           // doc
           , addz_tests     // tests
           , ["mode",mode]  // options
-          , ["pt",pt] );  // add scope
+          , ["pt",pt] );   // add scope
           ); 
 }    
 ```
 
 c. Include this:
 
-```
+```java
 include <openscad_doctest.scad> 
 addz_test( 13 );
 ```
@@ -105,7 +105,7 @@ addz_test( 13 );
 The output of **doctest()** depends on the value of option **mode**. For example,
 `mode=13`, which is the full display of everything (See section **Doctest Modes** for details), gives this:
 
-```
+```java
 -------------------------------------------------------
 addz ( p,z )=array ( tested:3/failed:1 )
 | Given a point (p) and a number (z), add z to p.z if p is
@@ -166,13 +166,13 @@ Special attention is needed when writing doc and tests.
 
 a. Use double apostrophes ('') in place of a quote symbol(")to represent a string:
 
-```
+```java
 [ "''abcdef'', ''def''", dt_begwith("abcdef", "def"), false ]
 ```
 
 b. In the doc, use double semicolon (;;) as a linebreak:
    
-```
+```java
 dt_get=[ ... ,
 " Given a str or arr (o), an index (i), get the i-th item.
 ;; i could be negative.
@@ -191,7 +191,7 @@ Being able to set variable scope for testing makes coding the tests a lot easier
 also make the tests much easier to read, especially when the value length is long 
 and repeated use of a variable is needed. 
 
-```javascript
+```java
 module addz_test( mode=13 ){
 
       pt=[3,4,5];   // define test variables
@@ -212,7 +212,7 @@ module addz_test( mode=13 ){
 
 The scope will be displayed in the output:
 
-```
+```java
 |Tests:
 |
 |> pt= [3, 4, 5];             // scope displayed in the output 
@@ -228,7 +228,7 @@ in place of test cases, the other is an inline comment written as an
 option to a test case. Consider the example used in *Quick Start*. We 
 add 3 comments to the code:
 
-```
+```java
 module addz_test( mode=13 ){
   pt=[3,4,5];   
   doctest
@@ -252,7 +252,8 @@ module addz_test( mode=13 ){
 In some cases, it's hard to compare variables and it's a good idea to 
 convert them into string before comparison. There's an option *asstr* that
 can be used:
-```
+
+```java
 module addz_test( mode=13 ){
   pt=[3,4,5];  
   doctest
@@ -272,8 +273,7 @@ module addz_test( mode=13 ){
 
 Functions used by **doctest()** could serve as a stand-alone lib w/o the use of doctest. See 
 below or *doctest_tool_test()* where they are tested by **doctest()**. 
-
-```
+```java
 dt_begwith ( o,x )=true|false
 dt_countStr ( arr )=int
 dt_countType ( arr,typ )=int
