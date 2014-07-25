@@ -1,7 +1,7 @@
 OpenSCAD_DocTest Modes
 ======================
 
-Set `mode` when calling: `doctest(...["mode",mode])`
+[OpenSCAD_DocTest](https://github.com/runsun/openscad_doctest) is a library for *documentation* and *unit testing* of [OpenSCAD](http://www.openscad.org) functions. The mission is carried out by function `doctest(...["mode",mode])` that can be called with different `mode`. This file shows examples for output of all modes. 
 
 ###["mode",0]
 No doc, doesn't do or display tests. Good for **directory listing**.<br/><br/>
