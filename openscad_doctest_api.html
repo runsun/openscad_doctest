@@ -1,0 +1,593 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+	<META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=utf-8">
+	<TITLE></TITLE>
+	<META NAME="GENERATOR" CONTENT="LibreOffice 3.6  (Linux)">
+	<META NAME="CREATED" CONTENT="20140722;19383500">
+	<META NAME="CHANGED" CONTENT="20140722;20501500">
+	<STYLE TYPE="text/css">
+	<!--
+		@page { margin: 0.79in }
+		P { margin-bottom: 0.08in }
+		A:link { so-language: zxx }
+	-->
+	</STYLE>
+</HEAD>
+<BODY LANG="en-US" DIR="LTR">
+<PRE STYLE="margin-top: 0.05in; margin-bottom: 0.08in"><FONT COLOR="#a52a2a"><FONT FACE="Ubuntu Mono"><FONT SIZE=3>#########################################################################</FONT></FONT></FONT></PRE><P STYLE="margin-bottom: 0in">
+<FONT FACE="Ubuntu Mono"><FONT COLOR="#a52a2a"><FONT SIZE=5><B>OpenSCAD_DocTest
+API</B></FONT></FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><FONT FACE="Ubuntu Mono"><FONT SIZE=3>-------------------------------------------------------</FONT><FONT SIZE=3>---------------</FONT><FONT SIZE=3>---</FONT><FONT SIZE=2 STYLE="font-size: 11pt"><U><BR></U></FONT><FONT SIZE=2 STYLE="font-size: 11pt">This
+is the api of </FONT><FONT SIZE=2 STYLE="font-size: 11pt"><B>OpenSCAD_DocTest</B></FONT><FONT SIZE=2 STYLE="font-size: 11pt">
+lib. It is created using function</FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><FONT FACE="Ubuntu Mono"><FONT SIZE=2 STYLE="font-size: 11pt"><I>doctest_tool_test(mode=13)
+</I></FONT><FONT SIZE=2 STYLE="font-size: 11pt">in file
+openscad_doctest_help.scad. The output </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0in"><FONT FACE="Ubuntu Mono"><FONT SIZE=2 STYLE="font-size: 11pt">to</FONT><FONT SIZE=2 STYLE="font-size: 11pt">
+the OpenSCAD console is copied and pasted into LibraOffice Writer,
+and </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0in"><FONT FACE="Ubuntu Mono"><FONT SIZE=2 STYLE="font-size: 11pt">saved
+to this html file after minor </FONT><FONT SIZE=2 STYLE="font-size: 11pt">editing</FONT><FONT SIZE=2 STYLE="font-size: 11pt">.
+This is a good demo of using </FONT></FONT>
+</P>
+<P STYLE="margin-bottom: 0in"><FONT FACE="Ubuntu Mono"><FONT SIZE=2 STYLE="font-size: 11pt"><B>OpenSCAD_DocTest
+</B></FONT><FONT SIZE=2 STYLE="font-size: 11pt">for</FONT><FONT SIZE=2 STYLE="font-size: 11pt">
+documentation.</FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<PRE STYLE="margin-top: 0.05in; margin-bottom: 0.08in"><FONT COLOR="#a52a2a"><FONT FACE="Ubuntu Mono"><FONT SIZE=3>######################################################################### </FONT></FONT></FONT>
+<FONT COLOR="#a52a2a"><FONT FACE="ubuntu mono"><FONT SIZE=5><B>doctest()</B></FONT></FONT></FONT></PRE><P STYLE="margin-bottom: 0in">
+<FONT FACE="Courier New,courier">-----------------------------------------------------------------</FONT><U><BR></U><U><B>doctest</B></U><FONT COLOR="#008000"><U>
+( </U></FONT><FONT COLOR="#444444"><FONT FACE="ubuntu mono"><I><U>doc,recs=[],ops=[],scope=[]</U></I></FONT></FONT><FONT COLOR="#008000"><U>
+)</U></FONT></P>
+<PRE STYLE="margin-top: 0.05in"><FONT FACE="ubuntu mono">| Doc and test tool for OpenSCAD functions. </FONT>
+<FONT FACE="ubuntu mono">| </FONT>
+<FONT FACE="ubuntu mono">| </FONT><FONT FACE="ubuntu mono"><U>doc</U></FONT><FONT FACE="ubuntu mono">: array of 5 strings:</FONT>
+<FONT FACE="ubuntu mono">|</FONT>
+<FONT FACE="ubuntu mono">|   [ func_name, arg_name(s), return_type, tags, doc_content ]</FONT>
+<FONT FACE="ubuntu mono">|</FONT>
+<FONT FACE="ubuntu mono">|   e.g, [&quot;addz&quot;,&quot;p,z&quot;,&quot;array&quot;,&quot;Array&quot;,&quot;doc...&quot;]</FONT>
+<FONT FACE="ubuntu mono">|</FONT>
+<FONT FACE="ubuntu mono">| </FONT><FONT FACE="ubuntu mono"><U>recs</U></FONT><FONT FACE="ubuntu mono">: array of test cases, each is:</FONT>
+<FONT FACE="ubuntu mono">|</FONT>
+<FONT FACE="ubuntu mono">|   [ arg_string, result, wanted, test_option ]</FONT>
+<FONT FACE="ubuntu mono">|</FONT>
+<FONT FACE="ubuntu mono">|   e.g, [ &quot;[3,4],2&quot;, addz([3,4],2), [3,4,2] ]</FONT>
+<FONT FACE="ubuntu mono">|</FONT>
+<FONT FACE="ubuntu mono">|   where test_option is an optional array:</FONT>
+<FONT FACE="ubuntu mono">|</FONT>
+<FONT FACE="ubuntu mono">|     [ &quot;rem&quot;, ..., &quot;asstr&quot;, true|false ]  </FONT>
+<FONT FACE="ubuntu mono">| </FONT>
+<FONT FACE="ubuntu mono">| </FONT><FONT FACE="ubuntu mono"><U>ops</U></FONT><FONT FACE="ubuntu mono">: options for all test cases in this call:</FONT>
+<FONT FACE="ubuntu mono">|</FONT>
+<FONT FACE="ubuntu mono">|   [ &quot;mode&quot;, 13      // Chk doctest_help()</FONT>
+<FONT FACE="ubuntu mono">|   , &quot;asstr&quot;, false  // test all as string</FONT>
+<FONT FACE="ubuntu mono">|   , &quot;prefix&quot;, &quot;|&quot; // prefix for each line</FONT>
+<FONT FACE="ubuntu mono">|   ]</FONT>
+<FONT FACE="ubuntu mono">| </FONT>
+<FONT FACE="ubuntu mono">| </FONT><FONT FACE="ubuntu mono"><U>scope</U></FONT><FONT FACE="ubuntu mono">: scope used for test cases. Useful especially when</FONT>
+<FONT FACE="ubuntu mono">|    the var value is long and need to be used multiple times.</FONT>
+<FONT FACE="ubuntu mono">|    It is in a hash format, e.g., [&quot;point&quot;,[-1,2,3]]</FONT>
+<FONT FACE="ubuntu mono">|</FONT>
+<FONT FACE="ubuntu mono">| </FONT><FONT FACE="ubuntu mono"><U>Tags:</U></FONT> <FONT FACE="ubuntu mono">Doc,Test</FONT></PRE><P STYLE="margin-bottom: 0in">
+<BR>
+</P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<PRE STYLE="margin-top: 0.05in; margin-bottom: 0.08in; page-break-before: always"><FONT COLOR="#a52a2a"><FONT FACE="ubuntu mono"><FONT SIZE=3>#########################################################################</FONT></FONT></FONT>
+<FONT COLOR="#a52a2a"><FONT FACE="ubuntu mono"><FONT SIZE=5><B>Utilities</B></FONT></FONT></FONT></PRE><P STYLE="margin-bottom: 0in">
+<FONT FACE="Courier New, courier">-----------------------------------------------------------------</FONT><U><BR></U><U><B>dt</B></U><FONT FACE="DejaVu Sans"><SPAN LANG="zh-CN"><U><FONT FACE="DejaVu Sans"><FONT SIZE=2><SPAN LANG="zh-CN"><B>＿</B></SPAN></FONT></FONT></U></SPAN></FONT><U><B>begwith</B></U><FONT COLOR="#008000"><U>
+( </U></FONT><FONT COLOR="#444444"><FONT FACE="ubuntu mono"><I><U>o,x</U></I></FONT></FONT><FONT COLOR="#008000"><U>
+)</U></FONT><FONT COLOR="#0000ff"><U>=</U></FONT><U>true|false (
+tested:6 )</U></P>
+<PRE STYLE="margin-top: 0.05in; margin-bottom: 0.08in"><FONT FACE="ubuntu mono">| Given a str|arr (o) and x, return true if o starts with x.</FONT>
+<FONT FACE="ubuntu mono">|</FONT>
+<FONT FACE="ubuntu mono">| </FONT><FONT FACE="ubuntu mono"><U>Tags:</U></FONT> <FONT FACE="ubuntu mono">String, Array, Inspect</FONT>
+<FONT FACE="ubuntu mono">|</FONT>
+<FONT FACE="ubuntu mono">|</FONT><FONT FACE="ubuntu mono"><U>Tests:</U></FONT>
+<FONT FACE="ubuntu mono">|</FONT>
+<FONT FACE="ubuntu mono">|&gt; </FONT><FONT COLOR="#00008b"><FONT FACE="ubuntu mono">dt_begwith</FONT></FONT><FONT FACE="ubuntu mono"><B>( </B></FONT><FONT COLOR="#444444"><FONT FACE="ubuntu mono"><I>&quot;abcdef&quot;, &quot;def&quot;</I></FONT></FONT> <FONT FACE="ubuntu mono"><B>)</B></FONT><FONT COLOR="#808080"><FONT FACE="ubuntu mono">= </FONT></FONT><FONT COLOR="#a52a2a"><FONT FACE="ubuntu mono">false</FONT></FONT>
+<FONT FACE="ubuntu mono">|&gt; </FONT><FONT COLOR="#00008b"><FONT FACE="ubuntu mono">dt_begwith</FONT></FONT><FONT FACE="ubuntu mono"><B>( </B></FONT><FONT COLOR="#444444"><FONT FACE="ubuntu mono"><I>&quot;abcdef&quot;, &quot;abc&quot;</I></FONT></FONT> <FONT FACE="ubuntu mono"><B>)</B></FONT><FONT COLOR="#808080"><FONT FACE="ubuntu mono">= </FONT></FONT><FONT COLOR="#a52a2a"><FONT FACE="ubuntu mono">true</FONT></FONT>
+<FONT FACE="ubuntu mono">|&gt; </FONT><FONT COLOR="#00008b"><FONT FACE="ubuntu mono">dt_begwith</FONT></FONT><FONT FACE="ubuntu mono"><B>( </B></FONT><FONT COLOR="#444444"><FONT FACE="ubuntu mono"><I>&quot;abcdef&quot;, &quot;&quot;</I></FONT></FONT> <FONT FACE="ubuntu mono"><B>)</B></FONT><FONT COLOR="#808080"><FONT FACE="ubuntu mono">= </FONT></FONT><FONT COLOR="#a52a2a"><FONT FACE="ubuntu mono">undef</FONT></FONT>
+<FONT FACE="ubuntu mono">|&gt; </FONT><FONT COLOR="#00008b"><FONT FACE="ubuntu mono">dt_begwith</FONT></FONT><FONT FACE="ubuntu mono"><B>( </B></FONT><FONT COLOR="#444444"><FONT FACE="ubuntu mono"><I>[&quot;ab&quot;,&quot;cd&quot;,&quot;ef&quot;, &quot;ab&quot;</I></FONT></FONT> <FONT FACE="ubuntu mono"><B>)</B></FONT><FONT COLOR="#808080"><FONT FACE="ubuntu mono">= </FONT></FONT><FONT COLOR="#a52a2a"><FONT FACE="ubuntu mono">true</FONT></FONT>
+<FONT FACE="ubuntu mono">|&gt; </FONT><FONT COLOR="#00008b"><FONT FACE="ubuntu mono">dt_begwith</FONT></FONT><FONT FACE="ubuntu mono"><B>( </B></FONT><FONT COLOR="#444444"><FONT FACE="ubuntu mono"><I>[], &quot;ab&quot;</I></FONT></FONT> <FONT FACE="ubuntu mono"><B>)</B></FONT><FONT COLOR="#808080"><FONT FACE="ubuntu mono">= </FONT></FONT><FONT COLOR="#a52a2a"><FONT FACE="ubuntu mono">false</FONT></FONT>
+<FONT FACE="ubuntu mono">|&gt; </FONT><FONT COLOR="#00008b"><FONT FACE="ubuntu mono">dt_begwith</FONT></FONT><FONT FACE="ubuntu mono"><B>( </B></FONT><FONT COLOR="#444444"><FONT FACE="ubuntu mono"><I>&quot;&quot;, &quot;ab&quot;</I></FONT></FONT> <FONT FACE="ubuntu mono"><B>)</B></FONT><FONT COLOR="#808080"><FONT FACE="ubuntu mono">= </FONT></FONT><FONT COLOR="#a52a2a"><FONT FACE="ubuntu mono">false</FONT></FONT></PRE><P STYLE="margin-bottom: 0in">
+<BR><FONT FACE="Courier New, courier">-----------------------------------------------------------------</FONT><U><BR></U><U><B>dt</B></U><FONT FACE="DejaVu Sans"><SPAN LANG="zh-CN"><U><FONT FACE="DejaVu Sans"><FONT SIZE=2><SPAN LANG="zh-CN"><B>＿</B></SPAN></FONT></FONT></U></SPAN></FONT><U><B>countStr</B></U><FONT COLOR="#008000"><U>
+( </U></FONT><FONT COLOR="#444444"><FONT FACE="ubuntu mono"><I><U>arr</U></I></FONT></FONT><FONT COLOR="#008000"><U>
+)</U></FONT><FONT COLOR="#0000ff"><U>=</U></FONT><U>int ( tested:2 )</U></P>
+<PRE STYLE="margin-top: 0.05in; margin-bottom: 0.08in"><FONT FACE="ubuntu mono">| Given array (arr), count the number of strings in arr. </FONT>
+<FONT FACE="ubuntu mono">|</FONT>
+<FONT FACE="ubuntu mono">| </FONT><FONT FACE="ubuntu mono"><U>Tags:</U></FONT> <FONT FACE="ubuntu mono">Array, Inspect</FONT>
+<FONT FACE="ubuntu mono">|</FONT>
+<FONT FACE="ubuntu mono">|</FONT><FONT FACE="ubuntu mono"><U>Tests:</U></FONT>
+<FONT FACE="ubuntu mono">|</FONT>
+<FONT FACE="ubuntu mono">|&gt; </FONT><FONT COLOR="#00008b"><FONT FACE="ubuntu mono">dt_countStr</FONT></FONT><FONT FACE="ubuntu mono"><B>( </B></FONT><FONT COLOR="#444444"><FONT FACE="ubuntu mono"><I>[&quot;x&quot;,2,&quot;3&quot;,5]</I></FONT></FONT> <FONT FACE="ubuntu mono"><B>)</B></FONT><FONT COLOR="#808080"><FONT FACE="ubuntu mono">= </FONT></FONT><FONT COLOR="#a52a2a"><FONT FACE="ubuntu mono">2</FONT></FONT>
+<FONT FACE="ubuntu mono">|&gt; </FONT><FONT COLOR="#00008b"><FONT FACE="ubuntu mono">dt_countStr</FONT></FONT><FONT FACE="ubuntu mono"><B>( </B></FONT><FONT COLOR="#444444"><FONT FACE="ubuntu mono"><I>[&quot;x&quot;,2, 5]</I></FONT></FONT> <FONT FACE="ubuntu mono"><B>)</B></FONT><FONT COLOR="#808080"><FONT FACE="ubuntu mono">= </FONT></FONT><FONT COLOR="#a52a2a"><FONT FACE="ubuntu mono">1</FONT></FONT></PRE><P STYLE="margin-bottom: 0in">
+<BR>
+</P>
+<P STYLE="margin-bottom: 0in"><FONT FACE="Courier New, courier">-----------------------------------------------------------------</FONT><U><BR></U><U><B>dt</B></U><FONT FACE="DejaVu Sans"><SPAN LANG="zh-CN"><U><FONT FACE="DejaVu Sans"><FONT SIZE=2><SPAN LANG="zh-CN"><B>＿</B></SPAN></FONT></FONT></U></SPAN></FONT><U><B>countType</B></U><FONT COLOR="#008000"><U>
+( </U></FONT><FONT COLOR="#444444"><FONT FACE="ubuntu mono"><I><U>arr,typ</U></I></FONT></FONT><FONT COLOR="#008000"><U>
+)</U></FONT><FONT COLOR="#0000ff"><U>=</U></FONT><U>int ( tested:3 )</U></P>
+<PRE STYLE="margin-top: 0.05in; margin-bottom: 0.08in"><FONT FACE="ubuntu mono">| Given array (arr) and dt_type name (typ), count the items of type</FONT>
+<FONT FACE="ubuntu mono">| *typ* in arr.</FONT>
+<FONT FACE="ubuntu mono">|</FONT>
+<FONT FACE="ubuntu mono">| </FONT><FONT FACE="ubuntu mono"><U>Tags:</U></FONT> <FONT FACE="ubuntu mono">Array, Inspect</FONT>
+<FONT FACE="ubuntu mono">|</FONT>
+<FONT FACE="ubuntu mono">|</FONT><FONT FACE="ubuntu mono"><U>Tests:</U></FONT>
+<FONT FACE="ubuntu mono">|</FONT>
+<FONT FACE="ubuntu mono">|&gt; </FONT><FONT COLOR="#00008b"><FONT FACE="ubuntu mono">dt_countType</FONT></FONT><FONT FACE="ubuntu mono"><B>( </B></FONT><FONT COLOR="#444444"><FONT FACE="ubuntu mono"><I>[&quot;x&quot;,2,[1,2],5.1], &quot;str&quot;</I></FONT></FONT> <FONT FACE="ubuntu mono"><B>)</B></FONT><FONT COLOR="#808080"><FONT FACE="ubuntu mono">= </FONT></FONT><FONT COLOR="#a52a2a"><FONT FACE="ubuntu mono">1</FONT></FONT>
+<FONT FACE="ubuntu mono">|&gt; </FONT><FONT COLOR="#00008b"><FONT FACE="ubuntu mono">dt_countType</FONT></FONT><FONT FACE="ubuntu mono"><B>( </B></FONT><FONT COLOR="#444444"><FONT FACE="ubuntu mono"><I>[&quot;x&quot;,2,[1,2],5.1,3], &quot;int&quot;</I></FONT></FONT> <FONT FACE="ubuntu mono"><B>)</B></FONT><FONT COLOR="#808080"><FONT FACE="ubuntu mono">= </FONT></FONT><FONT COLOR="#a52a2a"><FONT FACE="ubuntu mono">2</FONT></FONT>
+<FONT FACE="ubuntu mono">|&gt; </FONT><FONT COLOR="#00008b"><FONT FACE="ubuntu mono">dt_countType</FONT></FONT><FONT FACE="ubuntu mono"><B>( </B></FONT><FONT COLOR="#444444"><FONT FACE="ubuntu mono"><I>[&quot;x&quot;,2,[1,2],5.1,3], &quot;float&quot;</I></FONT></FONT> <FONT FACE="ubuntu mono"><B>)</B></FONT><FONT COLOR="#808080"><FONT FACE="ubuntu mono">= </FONT></FONT><FONT COLOR="#a52a2a"><FONT FACE="ubuntu mono">1</FONT></FONT></PRE><P STYLE="margin-bottom: 0in">
+<BR>
+</P>
+<P STYLE="margin-bottom: 0in"><FONT FACE="Courier New, courier">-----------------------------------------------------------------</FONT><U><BR></U><U><B>echo</B></U><FONT FACE="DejaVu Sans"><SPAN LANG="zh-CN"><U><FONT FACE="DejaVu Sans"><FONT SIZE=2><SPAN LANG="zh-CN"><B>＿</B></SPAN></FONT></FONT></U><FONT COLOR="#008000"><U><FONT FACE="DejaVu Sans"><FONT SIZE=2><SPAN LANG="zh-CN">
+</SPAN></FONT></FONT></U></FONT></SPAN></FONT><FONT COLOR="#008000"><U>(
+</U></FONT><FONT COLOR="#444444"><FONT FACE="ubuntu mono"><I><U>s,arr=undef</U></I></FONT></FONT><FONT COLOR="#008000"><U>
+)</U></FONT></P>
+<PRE STYLE="margin-top: 0.05in; margin-bottom: 0.08in"><FONT FACE="ubuntu mono">| Given a string containing one or more &quot;{_}&quot; as blanks to fill,</FONT>
+<FONT FACE="ubuntu mono">| and an array (arr) as the data to fill, echo a new string with all </FONT>
+<FONT FACE="ubuntu mono">| blanks replaced by arr items one by one. If the arr is given as </FONT>
+<FONT FACE="ubuntu mono">| a string, it is the same as echo( str(s,arr) ).</FONT>
+<FONT FACE="ubuntu mono">|</FONT>
+<FONT FACE="ubuntu mono">| Example usage: </FONT>
+<FONT FACE="ubuntu mono">|</FONT>
+<FONT FACE="ubuntu mono">| echo_( &quot;{_}.scad, version={_}&quot;, [&quot;openscad_doctest&quot;, &quot;20140729-1&quot;] );</FONT>
+<FONT FACE="ubuntu mono">|</FONT>
+<FONT FACE="ubuntu mono">| </FONT><FONT FACE="ubuntu mono"><U>Tags:</U></FONT> <FONT FACE="ubuntu mono">Console</FONT></PRE><P STYLE="margin-bottom: 0in">
+<BR>
+</P>
+<P STYLE="margin-bottom: 0in"><FONT FACE="Courier New, courier">-----------------------------------------------------------------</FONT><U><BR></U><U><B>dt</B></U><FONT FACE="DejaVu Sans"><SPAN LANG="zh-CN"><U><FONT FACE="DejaVu Sans"><FONT SIZE=2><SPAN LANG="zh-CN"><B>＿</B></SPAN></FONT></FONT></U></SPAN></FONT><U><B>endwith</B></U><FONT COLOR="#008000"><U>
+( </U></FONT><FONT COLOR="#444444"><FONT FACE="ubuntu mono"><I><U>o,x</U></I></FONT></FONT><FONT COLOR="#008000"><U>
+)</U></FONT><FONT COLOR="#0000ff"><U>=</U></FONT><U>T/F ( tested:4 )</U></P>
+<PRE STYLE="margin-top: 0.05in; margin-bottom: 0.08in"><FONT FACE="ubuntu mono">| Given a str|arr (o) and x, return true if o ends with x.</FONT>
+<FONT FACE="ubuntu mono">|</FONT>
+<FONT FACE="ubuntu mono">| </FONT><FONT FACE="ubuntu mono"><U>Tags:</U></FONT> <FONT FACE="ubuntu mono">String, Array, Inspect</FONT>
+<FONT FACE="ubuntu mono">|</FONT>
+<FONT FACE="ubuntu mono">|</FONT><FONT FACE="ubuntu mono"><U>Tests:</U></FONT>
+<FONT FACE="ubuntu mono">|</FONT>
+<FONT FACE="ubuntu mono">|&gt; </FONT><FONT COLOR="#00008b"><FONT FACE="ubuntu mono">dt_endwith</FONT></FONT><FONT FACE="ubuntu mono"><B>( </B></FONT><FONT COLOR="#444444"><FONT FACE="ubuntu mono"><I>&quot;abcdef&quot;, &quot;def&quot;</I></FONT></FONT> <FONT FACE="ubuntu mono"><B>)</B></FONT><FONT COLOR="#808080"><FONT FACE="ubuntu mono">= </FONT></FONT><FONT COLOR="#a52a2a"><FONT FACE="ubuntu mono">true</FONT></FONT>
+<FONT FACE="ubuntu mono">|&gt; </FONT><FONT COLOR="#00008b"><FONT FACE="ubuntu mono">dt_endwith</FONT></FONT><FONT FACE="ubuntu mono"><B>( </B></FONT><FONT COLOR="#444444"><FONT FACE="ubuntu mono"><I>&quot;abcdef&quot;, &quot;def&quot;</I></FONT></FONT> <FONT FACE="ubuntu mono"><B>)</B></FONT><FONT COLOR="#808080"><FONT FACE="ubuntu mono">= </FONT></FONT><FONT COLOR="#a52a2a"><FONT FACE="ubuntu mono">false</FONT></FONT>
+<FONT FACE="ubuntu mono">|&gt; </FONT><FONT COLOR="#00008b"><FONT FACE="ubuntu mono">dt_endwith</FONT></FONT><FONT FACE="ubuntu mono"><B>( </B></FONT><FONT COLOR="#444444"><FONT FACE="ubuntu mono"><I>[&quot;ab&quot;,&quot;cd&quot;,&quot;ef&quot;], &quot;ef&quot;</I></FONT></FONT> <FONT FACE="ubuntu mono"><B>)</B></FONT><FONT COLOR="#808080"><FONT FACE="ubuntu mono">= </FONT></FONT><FONT COLOR="#a52a2a"><FONT FACE="ubuntu mono">true</FONT></FONT>
+<FONT FACE="ubuntu mono">|&gt; </FONT><FONT COLOR="#00008b"><FONT FACE="ubuntu mono">dt_endwith</FONT></FONT><FONT FACE="ubuntu mono"><B>( </B></FONT><FONT COLOR="#444444"><FONT FACE="ubuntu mono"><I>[&quot;ab&quot;,&quot;cd&quot;,&quot;ef&quot;], &quot;ab&quot;</I></FONT></FONT> <FONT FACE="ubuntu mono"><B>)</B></FONT><FONT COLOR="#808080"><FONT FACE="ubuntu mono">= </FONT></FONT><FONT COLOR="#a52a2a"><FONT FACE="ubuntu mono">false</FONT></FONT></PRE><P STYLE="margin-bottom: 0in">
+<BR>
+</P>
+<P STYLE="margin-bottom: 0in"><FONT FACE="Courier New, courier">-----------------------------------------------------------------</FONT><U><BR></U><U><B>dt</B></U><FONT FACE="DejaVu Sans"><SPAN LANG="zh-CN"><U><FONT FACE="DejaVu Sans"><FONT SIZE=2><SPAN LANG="zh-CN"><B>＿</B></SPAN></FONT></FONT></U></SPAN></FONT><U><B>fmt</B></U><FONT COLOR="#008000"><U>
+( </U></FONT><FONT COLOR="#444444"><FONT FACE="ubuntu mono"><I><U>x,[s,n,a,ud,fixedspace]</U></I></FONT></FONT><FONT COLOR="#008000"><U>
+)</U></FONT><FONT COLOR="#0000ff"><U>=</U></FONT><U>string</U></P>
+<PRE STYLE="margin-top: 0.05in; margin-bottom: 0.08in"><FONT FACE="ubuntu mono">| Given an variable (x), and formattings for string (s), number (n),</FONT>
+<FONT FACE="ubuntu mono">| array (a) or undef (ud), return a formatted string of x. If</FONT>
+<FONT FACE="ubuntu mono">| fixedspace is set to true, replace spaces with html space. The</FONT>
+<FONT FACE="ubuntu mono">| formatting is entered in &quot;(prefix),(suffix)&quot; pattern. For</FONT>
+<FONT FACE="ubuntu mono">| example, if x is a number, setting n=&quot;{,}&quot; converts x to &quot;{x}&quot;.</FONT>
+<FONT FACE="ubuntu mono">|</FONT>
+<FONT FACE="ubuntu mono">| </FONT><FONT FACE="ubuntu mono"><U>Tags:</U></FONT> <FONT FACE="ubuntu mono">String</FONT>
+<FONT FACE="ubuntu mono">|</FONT>
+<FONT FACE="ubuntu mono">|</FONT><FONT FACE="ubuntu mono"><U>Usage:</U></FONT>
+<FONT FACE="ubuntu mono">|</FONT>
+<FONT FACE="ubuntu mono">|dt_fmt(3.45): </FONT><FONT COLOR="#a52a2a"><FONT FACE="ubuntu mono">3.45</FONT></FONT>
+<FONT FACE="ubuntu mono">|dt_fmt([''a'',[3,''b''], 4]): </FONT><FONT COLOR="#000080"><FONT FACE="ubuntu mono">[&quot;a&quot;, [3, &quot;b&quot;], 4]</FONT></FONT>
+<FONT FACE="ubuntu mono">|dt_fmt(''a string with     5 spaces''): </FONT><FONT COLOR="#800080"><FONT FACE="ubuntu mono">&quot;astringwith5spaces&quot;</FONT></FONT>
+<FONT FACE="ubuntu mono">|dt_fmt(false): </FONT><FONT COLOR="#a52a2a"><FONT FACE="ubuntu mono">false</FONT></FONT></PRE><P STYLE="margin-bottom: 0in">
+<BR><FONT FACE="Courier New, courier">-----------------------------------------------------------------</FONT><U><BR></U><U><B>dt</B></U><FONT FACE="DejaVu Sans"><SPAN LANG="zh-CN"><U><FONT FACE="DejaVu Sans"><FONT SIZE=2><SPAN LANG="zh-CN"><B>＿</B></SPAN></FONT></FONT></U></SPAN></FONT><U><B>get</B></U><FONT COLOR="#008000"><U>
+( </U></FONT><FONT COLOR="#444444"><FONT FACE="ubuntu mono"><I><U>o,i,iscycle=false</U></I></FONT></FONT><FONT COLOR="#008000"><U>
+)</U></FONT><FONT COLOR="#0000ff"><U>=</U></FONT><U>item ( tested:14
+)</U></P>
+<PRE STYLE="margin-top: 0.05in; margin-bottom: 0.08in"><FONT FACE="ubuntu mono">| Given a str or arr (o), an index (i), get the i-th item.</FONT>
+<FONT FACE="ubuntu mono">| i could be negative.</FONT>
+<FONT FACE="ubuntu mono">|</FONT>
+<FONT FACE="ubuntu mono">| *iscycle*: cycling from the other end if out of range. Useful</FONT>
+<FONT FACE="ubuntu mono">| when looping through the boundary points of a shape.</FONT>
+<FONT FACE="ubuntu mono">|</FONT>
+<FONT FACE="ubuntu mono">| </FONT><FONT FACE="ubuntu mono"><U>Tags:</U></FONT> <FONT FACE="ubuntu mono">dt_index, Inspect, Array, String</FONT>
+<FONT FACE="ubuntu mono">|</FONT>
+<FONT FACE="ubuntu mono">|</FONT><FONT FACE="ubuntu mono"><U>Tests:</U></FONT>
+<FONT FACE="ubuntu mono">|</FONT>
+<FONT FACE="ubuntu mono">|&gt; arr= </FONT><FONT COLOR="#000080"><FONT FACE="ubuntu mono">[20, 30, 40, 50]</FONT></FONT><FONT FACE="ubuntu mono">; </FONT>
+<FONT FACE="ubuntu mono">|## array ##</FONT>
+<FONT FACE="ubuntu mono">|&gt; </FONT><FONT COLOR="#00008b"><FONT FACE="ubuntu mono">dt_get</FONT></FONT><FONT FACE="ubuntu mono"><B>( </B></FONT><FONT COLOR="#444444"><FONT FACE="ubuntu mono"><I>arr, 1</I></FONT></FONT> <FONT FACE="ubuntu mono"><B>)</B></FONT><FONT COLOR="#808080"><FONT FACE="ubuntu mono">= </FONT></FONT><FONT COLOR="#a52a2a"><FONT FACE="ubuntu mono">30</FONT></FONT>
+<FONT FACE="ubuntu mono">|&gt; </FONT><FONT COLOR="#00008b"><FONT FACE="ubuntu mono">dt_get</FONT></FONT><FONT FACE="ubuntu mono"><B>( </B></FONT><FONT COLOR="#444444"><FONT FACE="ubuntu mono"><I>arr, -1</I></FONT></FONT> <FONT FACE="ubuntu mono"><B>)</B></FONT><FONT COLOR="#808080"><FONT FACE="ubuntu mono">= </FONT></FONT><FONT COLOR="#a52a2a"><FONT FACE="ubuntu mono">50</FONT></FONT>
+<FONT FACE="ubuntu mono">|&gt; </FONT><FONT COLOR="#00008b"><FONT FACE="ubuntu mono">dt_get</FONT></FONT><FONT FACE="ubuntu mono"><B>( </B></FONT><FONT COLOR="#444444"><FONT FACE="ubuntu mono"><I>arr, -2</I></FONT></FONT> <FONT FACE="ubuntu mono"><B>)</B></FONT><FONT COLOR="#808080"><FONT FACE="ubuntu mono">= </FONT></FONT><FONT COLOR="#a52a2a"><FONT FACE="ubuntu mono">40</FONT></FONT>
+<FONT FACE="ubuntu mono">|&gt; </FONT><FONT COLOR="#00008b"><FONT FACE="ubuntu mono">dt_get</FONT></FONT><FONT FACE="ubuntu mono"><B>( </B></FONT><FONT COLOR="#444444"><FONT FACE="ubuntu mono"><I>arr, true</I></FONT></FONT> <FONT FACE="ubuntu mono"><B>)</B></FONT><FONT COLOR="#808080"><FONT FACE="ubuntu mono">= </FONT></FONT><FONT COLOR="#a52a2a"><FONT FACE="ubuntu mono">undef</FONT></FONT>
+<FONT FACE="ubuntu mono">|&gt; </FONT><FONT COLOR="#00008b"><FONT FACE="ubuntu mono">dt_get</FONT></FONT><FONT FACE="ubuntu mono"><B>( </B></FONT><FONT COLOR="#444444"><FONT FACE="ubuntu mono"><I>[], 1</I></FONT></FONT> <FONT FACE="ubuntu mono"><B>)</B></FONT><FONT COLOR="#808080"><FONT FACE="ubuntu mono">= </FONT></FONT><FONT COLOR="#a52a2a"><FONT FACE="ubuntu mono">undef</FONT></FONT>
+<FONT FACE="ubuntu mono">|&gt; </FONT><FONT COLOR="#00008b"><FONT FACE="ubuntu mono">dt_get</FONT></FONT><FONT FACE="ubuntu mono"><B>( </B></FONT><FONT COLOR="#444444"><FONT FACE="ubuntu mono"><I>[[2,3],[4,5],[6,7]], -2</I></FONT></FONT> <FONT FACE="ubuntu mono"><B>)</B></FONT><FONT COLOR="#808080"><FONT FACE="ubuntu mono">= </FONT></FONT><FONT COLOR="#000080"><FONT FACE="ubuntu mono">[4, 5]</FONT></FONT>
+<FONT FACE="ubuntu mono">|## string ##</FONT>
+<FONT FACE="ubuntu mono">|&gt; </FONT><FONT COLOR="#00008b"><FONT FACE="ubuntu mono">dt_get</FONT></FONT><FONT FACE="ubuntu mono"><B>( </B></FONT><FONT COLOR="#444444"><FONT FACE="ubuntu mono"><I>&quot;abcdef&quot;, -2</I></FONT></FONT> <FONT FACE="ubuntu mono"><B>)</B></FONT><FONT COLOR="#808080"><FONT FACE="ubuntu mono">= </FONT></FONT><FONT COLOR="#800080"><FONT FACE="ubuntu mono">&quot;e&quot;</FONT></FONT>
+<FONT FACE="ubuntu mono">|&gt; </FONT><FONT COLOR="#00008b"><FONT FACE="ubuntu mono">dt_get</FONT></FONT><FONT FACE="ubuntu mono"><B>( </B></FONT><FONT COLOR="#444444"><FONT FACE="ubuntu mono"><I>&quot;aabcdef&quot;, false</I></FONT></FONT> <FONT FACE="ubuntu mono"><B>)</B></FONT><FONT COLOR="#808080"><FONT FACE="ubuntu mono">= </FONT></FONT><FONT COLOR="#a52a2a"><FONT FACE="ubuntu mono">undef</FONT></FONT>
+<FONT FACE="ubuntu mono">|&gt; </FONT><FONT COLOR="#00008b"><FONT FACE="ubuntu mono">dt_get</FONT></FONT><FONT FACE="ubuntu mono"><B>( </B></FONT><FONT COLOR="#444444"><FONT FACE="ubuntu mono"><I>&quot;&quot;, 1</I></FONT></FONT> <FONT FACE="ubuntu mono"><B>)</B></FONT><FONT COLOR="#808080"><FONT FACE="ubuntu mono">= </FONT></FONT><FONT COLOR="#a52a2a"><FONT FACE="ubuntu mono">undef</FONT></FONT>
+<FONT FACE="ubuntu mono">|</FONT><FONT COLOR="#008b8b"><FONT FACE="ubuntu mono">//New 2014.6.27: iscycle</FONT></FONT>
+<FONT FACE="ubuntu mono">|&gt; </FONT><FONT COLOR="#00008b"><FONT FACE="ubuntu mono">dt_get</FONT></FONT><FONT FACE="ubuntu mono"><B>( </B></FONT><FONT COLOR="#444444"><FONT FACE="ubuntu mono"><I>arr, 4</I></FONT></FONT> <FONT FACE="ubuntu mono"><B>)</B></FONT><FONT COLOR="#808080"><FONT FACE="ubuntu mono">= </FONT></FONT><FONT COLOR="#a52a2a"><FONT FACE="ubuntu mono">undef</FONT></FONT>
+<FONT FACE="ubuntu mono">|&gt; </FONT><FONT COLOR="#00008b"><FONT FACE="ubuntu mono">dt_get</FONT></FONT><FONT FACE="ubuntu mono"><B>( </B></FONT><FONT COLOR="#444444"><FONT FACE="ubuntu mono"><I>arr, 4, iscycle=true</I></FONT></FONT> <FONT FACE="ubuntu mono"><B>)</B></FONT><FONT COLOR="#808080"><FONT FACE="ubuntu mono">= </FONT></FONT><FONT COLOR="#a52a2a"><FONT FACE="ubuntu mono">20</FONT></FONT>
+<FONT FACE="ubuntu mono">|&gt; </FONT><FONT COLOR="#00008b"><FONT FACE="ubuntu mono">dt_get</FONT></FONT><FONT FACE="ubuntu mono"><B>( </B></FONT><FONT COLOR="#444444"><FONT FACE="ubuntu mono"><I>arr, 10, iscycle=true</I></FONT></FONT> <FONT FACE="ubuntu mono"><B>)</B></FONT><FONT COLOR="#808080"><FONT FACE="ubuntu mono">= </FONT></FONT><FONT COLOR="#a52a2a"><FONT FACE="ubuntu mono">40</FONT></FONT>
+<FONT FACE="ubuntu mono">|&gt; </FONT><FONT COLOR="#00008b"><FONT FACE="ubuntu mono">dt_get</FONT></FONT><FONT FACE="ubuntu mono"><B>( </B></FONT><FONT COLOR="#444444"><FONT FACE="ubuntu mono"><I>arr, -5</I></FONT></FONT> <FONT FACE="ubuntu mono"><B>)</B></FONT><FONT COLOR="#808080"><FONT FACE="ubuntu mono">= </FONT></FONT><FONT COLOR="#a52a2a"><FONT FACE="ubuntu mono">undef</FONT></FONT>
+<FONT FACE="ubuntu mono">|&gt; </FONT><FONT COLOR="#00008b"><FONT FACE="ubuntu mono">dt_get</FONT></FONT><FONT FACE="ubuntu mono"><B>( </B></FONT><FONT COLOR="#444444"><FONT FACE="ubuntu mono"><I>arr, -5, iscycle=true</I></FONT></FONT> <FONT FACE="ubuntu mono"><B>)</B></FONT><FONT COLOR="#808080"><FONT FACE="ubuntu mono">= </FONT></FONT><FONT COLOR="#a52a2a"><FONT FACE="ubuntu mono">50</FONT></FONT></PRE><P STYLE="margin-bottom: 0in">
+<BR><FONT FACE="Courier New, courier">-----------------------------------------------------------------</FONT><U><BR></U><U><B>dt</B></U><FONT FACE="DejaVu Sans"><SPAN LANG="zh-CN"><U><FONT FACE="DejaVu Sans"><FONT SIZE=2><SPAN LANG="zh-CN"><B>＿</B></SPAN></FONT></FONT></U></SPAN></FONT><U><B>hash</B></U><FONT COLOR="#008000"><U>
+( </U></FONT><FONT COLOR="#444444"><FONT FACE="ubuntu mono"><I><U>h,k,
+notfound=undef, if_v=undef, then_v=undef, else_v=undef</U></I></FONT></FONT><FONT COLOR="#008000"><U>
+)</U></FONT><FONT COLOR="#0000ff"><U>=</U></FONT><U>Any ( tested:24 )</U></P>
+<PRE STYLE="margin-top: 0.05in; margin-bottom: 0.08in"><FONT FACE="ubuntu mono">| Given an array (h, arranged like h=[k,v,k2,v2 ...] to serve</FONT>
+<FONT FACE="ubuntu mono">| as a hash) and a key (k), return a v from h: dt_hash(h,k)=v.</FONT>
+<FONT FACE="ubuntu mono">| If key not found, or value not found (means k is the last item</FONT>
+<FONT FACE="ubuntu mono">| in h), return notfound. When if_v is defined, check if v=if_v.</FONT>
+<FONT FACE="ubuntu mono">| If yes, return then_v. If not, return else_v if defined, or v</FONT>
+<FONT FACE="ubuntu mono">| if not.</FONT>
+<FONT FACE="ubuntu mono">|</FONT>
+<FONT FACE="ubuntu mono">| </FONT><FONT FACE="ubuntu mono"><U>Tags:</U></FONT> <FONT FACE="ubuntu mono">dt_hash</FONT>
+<FONT FACE="ubuntu mono">|</FONT>
+<FONT FACE="ubuntu mono">|</FONT><FONT FACE="ubuntu mono"><U>Tests:</U></FONT>
+<FONT FACE="ubuntu mono">|</FONT>
+<FONT FACE="ubuntu mono">|&gt; h= </FONT><FONT COLOR="#000080"><FONT FACE="ubuntu mono">[-50, 20, &quot;xy&quot;, [0, 1], 2.3, 5, [0, 1], 10, true, 1, 1, false, -5]</FONT></FONT><FONT FACE="ubuntu mono">; </FONT>
+<FONT FACE="ubuntu mono">|&gt; </FONT><FONT COLOR="#00008b"><FONT FACE="ubuntu mono">dt_hash</FONT></FONT><FONT FACE="ubuntu mono"><B>( </B></FONT><FONT COLOR="#444444"><FONT FACE="ubuntu mono"><I>h, -50</I></FONT></FONT> <FONT FACE="ubuntu mono"><B>)</B></FONT><FONT COLOR="#808080"><FONT FACE="ubuntu mono">= </FONT></FONT><FONT COLOR="#a52a2a"><FONT FACE="ubuntu mono">20</FONT></FONT>
+<FONT FACE="ubuntu mono">|&gt; </FONT><FONT COLOR="#00008b"><FONT FACE="ubuntu mono">dt_hash</FONT></FONT><FONT FACE="ubuntu mono"><B>( </B></FONT><FONT COLOR="#444444"><FONT FACE="ubuntu mono"><I>h, &quot;xy&quot;</I></FONT></FONT> <FONT FACE="ubuntu mono"><B>)</B></FONT><FONT COLOR="#808080"><FONT FACE="ubuntu mono">= </FONT></FONT><FONT COLOR="#000080"><FONT FACE="ubuntu mono">[0, 1]</FONT></FONT>
+<FONT FACE="ubuntu mono">|&gt; </FONT><FONT COLOR="#00008b"><FONT FACE="ubuntu mono">dt_hash</FONT></FONT><FONT FACE="ubuntu mono"><B>( </B></FONT><FONT COLOR="#444444"><FONT FACE="ubuntu mono"><I>h, 2.3</I></FONT></FONT> <FONT FACE="ubuntu mono"><B>)</B></FONT><FONT COLOR="#808080"><FONT FACE="ubuntu mono">= </FONT></FONT><FONT COLOR="#a52a2a"><FONT FACE="ubuntu mono">5</FONT></FONT>
+<FONT FACE="ubuntu mono">|&gt; </FONT><FONT COLOR="#00008b"><FONT FACE="ubuntu mono">dt_hash</FONT></FONT><FONT FACE="ubuntu mono"><B>( </B></FONT><FONT COLOR="#444444"><FONT FACE="ubuntu mono"><I>h, [0,1]</I></FONT></FONT> <FONT FACE="ubuntu mono"><B>)</B></FONT><FONT COLOR="#808080"><FONT FACE="ubuntu mono">= </FONT></FONT><FONT COLOR="#a52a2a"><FONT FACE="ubuntu mono">10</FONT></FONT>
+<FONT FACE="ubuntu mono">|&gt; </FONT><FONT COLOR="#00008b"><FONT FACE="ubuntu mono">dt_hash</FONT></FONT><FONT FACE="ubuntu mono"><B>( </B></FONT><FONT COLOR="#444444"><FONT FACE="ubuntu mono"><I>h, true</I></FONT></FONT> <FONT FACE="ubuntu mono"><B>)</B></FONT><FONT COLOR="#808080"><FONT FACE="ubuntu mono">= </FONT></FONT><FONT COLOR="#a52a2a"><FONT FACE="ubuntu mono">1</FONT></FONT>
+<FONT FACE="ubuntu mono">|&gt; </FONT><FONT COLOR="#00008b"><FONT FACE="ubuntu mono">dt_hash</FONT></FONT><FONT FACE="ubuntu mono"><B>( </B></FONT><FONT COLOR="#444444"><FONT FACE="ubuntu mono"><I>h, 1</I></FONT></FONT> <FONT FACE="ubuntu mono"><B>)</B></FONT><FONT COLOR="#808080"><FONT FACE="ubuntu mono">= </FONT></FONT><FONT COLOR="#a52a2a"><FONT FACE="ubuntu mono">false</FONT></FONT>
+<FONT FACE="ubuntu mono">|&gt; </FONT><FONT COLOR="#00008b"><FONT FACE="ubuntu mono">dt_hash</FONT></FONT><FONT FACE="ubuntu mono"><B>( </B></FONT><FONT COLOR="#444444"><FONT FACE="ubuntu mono"><I>h, &quot;xx&quot;</I></FONT></FONT> <FONT FACE="ubuntu mono"><B>)</B></FONT><FONT COLOR="#808080"><FONT FACE="ubuntu mono">= </FONT></FONT><FONT COLOR="#a52a2a"><FONT FACE="ubuntu mono">undef</FONT></FONT>
+<FONT FACE="ubuntu mono">|## key found but it's in the last item without value:</FONT>
+<FONT FACE="ubuntu mono">|&gt; </FONT><FONT COLOR="#00008b"><FONT FACE="ubuntu mono">dt_hash</FONT></FONT><FONT FACE="ubuntu mono"><B>( </B></FONT><FONT COLOR="#444444"><FONT FACE="ubuntu mono"><I>h, -5</I></FONT></FONT> <FONT FACE="ubuntu mono"><B>)</B></FONT><FONT COLOR="#808080"><FONT FACE="ubuntu mono">= </FONT></FONT><FONT COLOR="#a52a2a"><FONT FACE="ubuntu mono">undef</FONT></FONT>
+<FONT FACE="ubuntu mono">|## notfound is given: </FONT>
+<FONT FACE="ubuntu mono">|&gt; </FONT><FONT COLOR="#00008b"><FONT FACE="ubuntu mono">dt_hash</FONT></FONT><FONT FACE="ubuntu mono"><B>( </B></FONT><FONT COLOR="#444444"><FONT FACE="ubuntu mono"><I>h, -5,&quot;df&quot;</I></FONT></FONT> <FONT FACE="ubuntu mono"><B>)</B></FONT><FONT COLOR="#808080"><FONT FACE="ubuntu mono">= </FONT></FONT><FONT COLOR="#800080"><FONT FACE="ubuntu mono">&quot;df&quot;</FONT></FONT><FONT COLOR="#008000"> </FONT><FONT COLOR="#008000"><FONT FACE="ubuntu mono">// value not found</FONT></FONT>
+<FONT FACE="ubuntu mono">|&gt; </FONT><FONT COLOR="#00008b"><FONT FACE="ubuntu mono">dt_hash</FONT></FONT><FONT FACE="ubuntu mono"><B>( </B></FONT><FONT COLOR="#444444"><FONT FACE="ubuntu mono"><I>h, -50, &quot;df&quot;</I></FONT></FONT> <FONT FACE="ubuntu mono"><B>)</B></FONT><FONT COLOR="#808080"><FONT FACE="ubuntu mono">= </FONT></FONT><FONT COLOR="#a52a2a"><FONT FACE="ubuntu mono">20</FONT></FONT>
+<FONT FACE="ubuntu mono">|&gt; </FONT><FONT COLOR="#00008b"><FONT FACE="ubuntu mono">dt_hash</FONT></FONT><FONT FACE="ubuntu mono"><B>( </B></FONT><FONT COLOR="#444444"><FONT FACE="ubuntu mono"><I>h, -100, &quot;df&quot;</I></FONT></FONT> <FONT FACE="ubuntu mono"><B>)</B></FONT><FONT COLOR="#808080"><FONT FACE="ubuntu mono">= </FONT></FONT><FONT COLOR="#800080"><FONT FACE="ubuntu mono">&quot;df&quot;</FONT></FONT>
+<FONT FACE="ubuntu mono">|## Other cases:</FONT>
+<FONT FACE="ubuntu mono">|&gt; </FONT><FONT COLOR="#00008b"><FONT FACE="ubuntu mono">dt_hash</FONT></FONT><FONT FACE="ubuntu mono"><B>( </B></FONT><FONT COLOR="#444444"><FONT FACE="ubuntu mono"><I>[], -100</I></FONT></FONT> <FONT FACE="ubuntu mono"><B>)</B></FONT><FONT COLOR="#808080"><FONT FACE="ubuntu mono">= </FONT></FONT><FONT COLOR="#a52a2a"><FONT FACE="ubuntu mono">undef</FONT></FONT>
+<FONT FACE="ubuntu mono">|&gt; </FONT><FONT COLOR="#00008b"><FONT FACE="ubuntu mono">dt_hash</FONT></FONT><FONT FACE="ubuntu mono"><B>( </B></FONT><FONT COLOR="#444444"><FONT FACE="ubuntu mono"><I>true, -100</I></FONT></FONT> <FONT FACE="ubuntu mono"><B>)</B></FONT><FONT COLOR="#808080"><FONT FACE="ubuntu mono">= </FONT></FONT><FONT COLOR="#a52a2a"><FONT FACE="ubuntu mono">undef</FONT></FONT>
+<FONT FACE="ubuntu mono">|&gt; </FONT><FONT COLOR="#00008b"><FONT FACE="ubuntu mono">dt_hash</FONT></FONT><FONT FACE="ubuntu mono"><B>( </B></FONT><FONT COLOR="#444444"><FONT FACE="ubuntu mono"><I>[[undef,10]], undef</I></FONT></FONT> <FONT FACE="ubuntu mono"><B>)</B></FONT><FONT COLOR="#808080"><FONT FACE="ubuntu mono">= </FONT></FONT><FONT COLOR="#a52a2a"><FONT FACE="ubuntu mono">undef</FONT></FONT>
+<FONT FACE="ubuntu mono">|  </FONT>
+<FONT FACE="ubuntu mono">|## Note below: you can ask for a default upon a non-hash !!</FONT>
+<FONT FACE="ubuntu mono">|&gt; </FONT><FONT COLOR="#00008b"><FONT FACE="ubuntu mono">dt_hash</FONT></FONT><FONT FACE="ubuntu mono"><B>( </B></FONT><FONT COLOR="#444444"><FONT FACE="ubuntu mono"><I>true, -100, &quot;df&quot;</I></FONT></FONT> <FONT FACE="ubuntu mono"><B>)</B></FONT><FONT COLOR="#808080"><FONT FACE="ubuntu mono">= </FONT></FONT><FONT COLOR="#800080"><FONT FACE="ubuntu mono">&quot;df&quot;</FONT></FONT>
+<FONT FACE="ubuntu mono">|&gt; </FONT><FONT COLOR="#00008b"><FONT FACE="ubuntu mono">dt_hash</FONT></FONT><FONT FACE="ubuntu mono"><B>( </B></FONT><FONT COLOR="#444444"><FONT FACE="ubuntu mono"><I>true, -100 </I></FONT></FONT> <FONT FACE="ubuntu mono"><B>)</B></FONT><FONT COLOR="#808080"><FONT FACE="ubuntu mono">= </FONT></FONT><FONT COLOR="#a52a2a"><FONT FACE="ubuntu mono">undef</FONT></FONT>
+<FONT FACE="ubuntu mono">|&gt; </FONT><FONT COLOR="#00008b"><FONT FACE="ubuntu mono">dt_hash</FONT></FONT><FONT FACE="ubuntu mono"><B>( </B></FONT><FONT COLOR="#444444"><FONT FACE="ubuntu mono"><I>3, -100, &quot;df&quot;</I></FONT></FONT> <FONT FACE="ubuntu mono"><B>)</B></FONT><FONT COLOR="#808080"><FONT FACE="ubuntu mono">= </FONT></FONT><FONT COLOR="#800080"><FONT FACE="ubuntu mono">&quot;df&quot;</FONT></FONT>
+<FONT FACE="ubuntu mono">|&gt; </FONT><FONT COLOR="#00008b"><FONT FACE="ubuntu mono">dt_hash</FONT></FONT><FONT FACE="ubuntu mono"><B>( </B></FONT><FONT COLOR="#444444"><FONT FACE="ubuntu mono"><I>&quot;test&quot;, -100, &quot;df&quot;</I></FONT></FONT> <FONT FACE="ubuntu mono"><B>)</B></FONT><FONT COLOR="#808080"><FONT FACE="ubuntu mono">= </FONT></FONT><FONT COLOR="#800080"><FONT FACE="ubuntu mono">&quot;df&quot;</FONT></FONT>
+<FONT FACE="ubuntu mono">|&gt; </FONT><FONT COLOR="#00008b"><FONT FACE="ubuntu mono">dt_hash</FONT></FONT><FONT FACE="ubuntu mono"><B>( </B></FONT><FONT COLOR="#444444"><FONT FACE="ubuntu mono"><I>false, 5, &quot;df&quot;</I></FONT></FONT> <FONT FACE="ubuntu mono"><B>)</B></FONT><FONT COLOR="#808080"><FONT FACE="ubuntu mono">= </FONT></FONT><FONT COLOR="#800080"><FONT FACE="ubuntu mono">&quot;df&quot;</FONT></FONT>
+<FONT FACE="ubuntu mono">|&gt; </FONT><FONT COLOR="#00008b"><FONT FACE="ubuntu mono">dt_hash</FONT></FONT><FONT FACE="ubuntu mono"><B>( </B></FONT><FONT COLOR="#444444"><FONT FACE="ubuntu mono"><I>0, 5, &quot;df&quot;</I></FONT></FONT> <FONT FACE="ubuntu mono"><B>)</B></FONT><FONT COLOR="#808080"><FONT FACE="ubuntu mono">= </FONT></FONT><FONT COLOR="#800080"><FONT FACE="ubuntu mono">&quot;df&quot;</FONT></FONT>
+<FONT FACE="ubuntu mono">|&gt; </FONT><FONT COLOR="#00008b"><FONT FACE="ubuntu mono">dt_hash</FONT></FONT><FONT FACE="ubuntu mono"><B>( </B></FONT><FONT COLOR="#444444"><FONT FACE="ubuntu mono"><I>undef, 5, &quot;df&quot;</I></FONT></FONT> <FONT FACE="ubuntu mono"><B>)</B></FONT><FONT COLOR="#808080"><FONT FACE="ubuntu mono">= </FONT></FONT><FONT COLOR="#800080"><FONT FACE="ubuntu mono">&quot;df&quot;</FONT></FONT>
+<FONT FACE="ubuntu mono">|  </FONT>
+<FONT FACE="ubuntu mono">|## New 20140528: if_v, then_v, else_v </FONT>
+<FONT FACE="ubuntu mono">|&gt; </FONT><FONT COLOR="#00008b"><FONT FACE="ubuntu mono">dt_hash</FONT></FONT><FONT FACE="ubuntu mono"><B>( </B></FONT><FONT COLOR="#444444"><FONT FACE="ubuntu mono"><I>h, 2.3, if_v=5, then_v=&quot;got_5&quot;</I></FONT></FONT> <FONT FACE="ubuntu mono"><B>)</B></FONT><FONT COLOR="#808080"><FONT FACE="ubuntu mono">= </FONT></FONT><FONT COLOR="#800080"><FONT FACE="ubuntu mono">&quot;got_5&quot;</FONT></FONT>
+<FONT FACE="ubuntu mono">|&gt; </FONT><FONT COLOR="#00008b"><FONT FACE="ubuntu mono">dt_hash</FONT></FONT><FONT FACE="ubuntu mono"><B>( </B></FONT><FONT COLOR="#444444"><FONT FACE="ubuntu mono"><I>h, 2.3, if_v=6, then_v=&quot;got_5&quot;</I></FONT></FONT> <FONT FACE="ubuntu mono"><B>)</B></FONT><FONT COLOR="#808080"><FONT FACE="ubuntu mono">= </FONT></FONT><FONT COLOR="#a52a2a"><FONT FACE="ubuntu mono">5</FONT></FONT>
+<FONT FACE="ubuntu mono">|&gt; </FONT><FONT COLOR="#00008b"><FONT FACE="ubuntu mono">dt_hash</FONT></FONT><FONT FACE="ubuntu mono"><B>( </B></FONT><FONT COLOR="#444444"><FONT FACE="ubuntu mono"><I>h, 2.3, if_v=6, then_v=&quot;got_5&quot;, else_v=&quot;not_5&quot;</I></FONT></FONT> <FONT FACE="ubuntu mono"><B>)</B></FONT><FONT COLOR="#808080"><FONT FACE="ubuntu mono">= </FONT></FONT><FONT COLOR="#800080"><FONT FACE="ubuntu mono">&quot;no_5&quot;</FONT></FONT></PRE><P STYLE="margin-bottom: 0in">
+<BR>
+</P>
+<P STYLE="margin-bottom: 0in"><FONT FACE="Courier New, courier">-----------------------------------------------------------------</FONT><U><BR></U><U><B>dt</B></U><FONT FACE="DejaVu Sans"><SPAN LANG="zh-CN"><U><FONT FACE="DejaVu Sans"><FONT SIZE=2><SPAN LANG="zh-CN"><B>＿</B></SPAN></FONT></FONT></U></SPAN></FONT><U><B>haskey</B></U><FONT COLOR="#008000"><U>
+( </U></FONT><FONT COLOR="#444444"><FONT FACE="ubuntu mono"><I><U>h,k</U></I></FONT></FONT><FONT COLOR="#008000"><U>
+)</U></FONT><FONT COLOR="#0000ff"><U>=</U></FONT><U>T|F ( tested:9 )</U></P>
+<PRE STYLE="margin-top: 0.05in; margin-bottom: 0.08in"><FONT FACE="ubuntu mono">| Check if the hash (h) has a key (k)</FONT>
+<FONT FACE="ubuntu mono">|</FONT>
+<FONT FACE="ubuntu mono">| </FONT><FONT FACE="ubuntu mono"><U>Tags:</U></FONT> <FONT FACE="ubuntu mono">Hash, Inspect</FONT>
+<FONT FACE="ubuntu mono">|</FONT>
+<FONT FACE="ubuntu mono">|</FONT><FONT FACE="ubuntu mono"><U>Tests:</U></FONT>
+<FONT FACE="ubuntu mono">|</FONT>
+<FONT FACE="ubuntu mono">|&gt; table= </FONT><FONT COLOR="#000080"><FONT FACE="ubuntu mono">[-50, 20, &quot;80&quot;, 25, 2.3, &quot;yes&quot;, [0, 1], 5, true, &quot;YES&quot;]</FONT></FONT><FONT FACE="ubuntu mono">; </FONT>
+<FONT FACE="ubuntu mono">|&gt; </FONT><FONT COLOR="#00008b"><FONT FACE="ubuntu mono">dt_haskey</FONT></FONT><FONT FACE="ubuntu mono"><B>( </B></FONT><FONT COLOR="#444444"><FONT FACE="ubuntu mono"><I>table, -50</I></FONT></FONT> <FONT FACE="ubuntu mono"><B>)</B></FONT><FONT COLOR="#808080"><FONT FACE="ubuntu mono">= </FONT></FONT><FONT COLOR="#a52a2a"><FONT FACE="ubuntu mono">true</FONT></FONT>
+<FONT FACE="ubuntu mono">|&gt; </FONT><FONT COLOR="#00008b"><FONT FACE="ubuntu mono">dt_haskey</FONT></FONT><FONT FACE="ubuntu mono"><B>( </B></FONT><FONT COLOR="#444444"><FONT FACE="ubuntu mono"><I>table, &quot;80&quot;</I></FONT></FONT> <FONT FACE="ubuntu mono"><B>)</B></FONT><FONT COLOR="#808080"><FONT FACE="ubuntu mono">= </FONT></FONT><FONT COLOR="#a52a2a"><FONT FACE="ubuntu mono">true</FONT></FONT>
+<FONT FACE="ubuntu mono">|&gt; </FONT><FONT COLOR="#00008b"><FONT FACE="ubuntu mono">dt_haskey</FONT></FONT><FONT FACE="ubuntu mono"><B>( </B></FONT><FONT COLOR="#444444"><FONT FACE="ubuntu mono"><I>table, &quot;xy&quot;</I></FONT></FONT> <FONT FACE="ubuntu mono"><B>)</B></FONT><FONT COLOR="#808080"><FONT FACE="ubuntu mono">= </FONT></FONT><FONT COLOR="#a52a2a"><FONT FACE="ubuntu mono">false</FONT></FONT>
+<FONT FACE="ubuntu mono">|&gt; </FONT><FONT COLOR="#00008b"><FONT FACE="ubuntu mono">dt_haskey</FONT></FONT><FONT FACE="ubuntu mono"><B>( </B></FONT><FONT COLOR="#444444"><FONT FACE="ubuntu mono"><I>table, 2.3</I></FONT></FONT> <FONT FACE="ubuntu mono"><B>)</B></FONT><FONT COLOR="#808080"><FONT FACE="ubuntu mono">= </FONT></FONT><FONT COLOR="#a52a2a"><FONT FACE="ubuntu mono">true</FONT></FONT>
+<FONT FACE="ubuntu mono">|&gt; </FONT><FONT COLOR="#00008b"><FONT FACE="ubuntu mono">dt_haskey</FONT></FONT><FONT FACE="ubuntu mono"><B>( </B></FONT><FONT COLOR="#444444"><FONT FACE="ubuntu mono"><I>table, [0,1]</I></FONT></FONT> <FONT FACE="ubuntu mono"><B>)</B></FONT><FONT COLOR="#808080"><FONT FACE="ubuntu mono">= </FONT></FONT><FONT COLOR="#a52a2a"><FONT FACE="ubuntu mono">true</FONT></FONT>
+<FONT FACE="ubuntu mono">|&gt; </FONT><FONT COLOR="#00008b"><FONT FACE="ubuntu mono">dt_haskey</FONT></FONT><FONT FACE="ubuntu mono"><B>( </B></FONT><FONT COLOR="#444444"><FONT FACE="ubuntu mono"><I>table, true</I></FONT></FONT> <FONT FACE="ubuntu mono"><B>)</B></FONT><FONT COLOR="#808080"><FONT FACE="ubuntu mono">= </FONT></FONT><FONT COLOR="#a52a2a"><FONT FACE="ubuntu mono">true</FONT></FONT>
+<FONT FACE="ubuntu mono">|&gt; </FONT><FONT COLOR="#00008b"><FONT FACE="ubuntu mono">dt_haskey</FONT></FONT><FONT FACE="ubuntu mono"><B>( </B></FONT><FONT COLOR="#444444"><FONT FACE="ubuntu mono"><I>table, -100</I></FONT></FONT> <FONT FACE="ubuntu mono"><B>)</B></FONT><FONT COLOR="#808080"><FONT FACE="ubuntu mono">= </FONT></FONT><FONT COLOR="#a52a2a"><FONT FACE="ubuntu mono">false</FONT></FONT>
+<FONT FACE="ubuntu mono">|&gt; </FONT><FONT COLOR="#00008b"><FONT FACE="ubuntu mono">dt_haskey</FONT></FONT><FONT FACE="ubuntu mono"><B>( </B></FONT><FONT COLOR="#444444"><FONT FACE="ubuntu mono"><I>[], -100</I></FONT></FONT> <FONT FACE="ubuntu mono"><B>)</B></FONT><FONT COLOR="#808080"><FONT FACE="ubuntu mono">= </FONT></FONT><FONT COLOR="#a52a2a"><FONT FACE="ubuntu mono">false</FONT></FONT>
+<FONT FACE="ubuntu mono">|&gt; </FONT><FONT COLOR="#00008b"><FONT FACE="ubuntu mono">dt_haskey</FONT></FONT><FONT FACE="ubuntu mono"><B>( </B></FONT><FONT COLOR="#444444"><FONT FACE="ubuntu mono"><I>[[undef,1], undef</I></FONT></FONT> <FONT FACE="ubuntu mono"><B>)</B></FONT><FONT COLOR="#808080"><FONT FACE="ubuntu mono">= </FONT></FONT><FONT COLOR="#a52a2a"><FONT FACE="ubuntu mono">true</FONT></FONT></PRE><P STYLE="margin-bottom: 0in">
+<BR>
+</P>
+<P STYLE="margin-bottom: 0in"><FONT FACE="Courier New, courier">-----------------------------------------------------------------</FONT><U><BR></U><U><B>dt</B></U><FONT FACE="DejaVu Sans"><SPAN LANG="zh-CN"><U><FONT FACE="DejaVu Sans"><FONT SIZE=2><SPAN LANG="zh-CN"><B>＿</B></SPAN></FONT></FONT></U></SPAN></FONT><U><B>index</B></U><FONT COLOR="#008000"><U>
+( </U></FONT><FONT COLOR="#444444"><FONT FACE="ubuntu mono"><I><U>o,x</U></I></FONT></FONT><FONT COLOR="#008000"><U>
+)</U></FONT><FONT COLOR="#0000ff"><U>=</U></FONT><U>int ( tested:27 )</U></P>
+<PRE STYLE="margin-top: 0.05in; margin-bottom: 0.08in"><FONT FACE="ubuntu mono">| Return the index of x in o (a str|arr), or -1 if not found.</FONT>
+<FONT FACE="ubuntu mono">|</FONT>
+<FONT FACE="ubuntu mono">| </FONT><FONT FACE="ubuntu mono"><U>Tags:</U></FONT> <FONT FACE="ubuntu mono">dt_index,Array,String,Inspect</FONT>
+<FONT FACE="ubuntu mono">|</FONT>
+<FONT FACE="ubuntu mono">|</FONT><FONT FACE="ubuntu mono"><U>Tests:</U></FONT>
+<FONT FACE="ubuntu mono">|</FONT>
+<FONT FACE="ubuntu mono">|&gt; arr= </FONT><FONT COLOR="#000080"><FONT FACE="ubuntu mono">[&quot;xy&quot;, &quot;xz&quot;, &quot;yz&quot;]</FONT></FONT><FONT FACE="ubuntu mono">; </FONT>
+<FONT FACE="ubuntu mono">|&gt; arr2= </FONT><FONT COLOR="#000080"><FONT FACE="ubuntu mono">[&quot;I_am_the_findw&quot;]</FONT></FONT><FONT FACE="ubuntu mono">; </FONT>
+<FONT FACE="ubuntu mono">|## Array dt_indexing ##</FONT>
+<FONT FACE="ubuntu mono">|&gt; </FONT><FONT COLOR="#00008b"><FONT FACE="ubuntu mono">dt_index</FONT></FONT><FONT FACE="ubuntu mono"><B>( </B></FONT><FONT COLOR="#444444"><FONT FACE="ubuntu mono"><I>arr, &quot;xz&quot;</I></FONT></FONT> <FONT FACE="ubuntu mono"><B>)</B></FONT><FONT COLOR="#808080"><FONT FACE="ubuntu mono">= </FONT></FONT><FONT COLOR="#a52a2a"><FONT FACE="ubuntu mono">1</FONT></FONT>
+<FONT FACE="ubuntu mono">|&gt; </FONT><FONT COLOR="#00008b"><FONT FACE="ubuntu mono">dt_index</FONT></FONT><FONT FACE="ubuntu mono"><B>( </B></FONT><FONT COLOR="#444444"><FONT FACE="ubuntu mono"><I>arr, &quot;yz&quot;</I></FONT></FONT> <FONT FACE="ubuntu mono"><B>)</B></FONT><FONT COLOR="#808080"><FONT FACE="ubuntu mono">= </FONT></FONT><FONT COLOR="#a52a2a"><FONT FACE="ubuntu mono">2</FONT></FONT>
+<FONT FACE="ubuntu mono">|&gt; </FONT><FONT COLOR="#00008b"><FONT FACE="ubuntu mono">dt_index</FONT></FONT><FONT FACE="ubuntu mono"><B>( </B></FONT><FONT COLOR="#444444"><FONT FACE="ubuntu mono"><I>arr, &quot;xx&quot;</I></FONT></FONT> <FONT FACE="ubuntu mono"><B>)</B></FONT><FONT COLOR="#808080"><FONT FACE="ubuntu mono">= </FONT></FONT><FONT COLOR="#a52a2a"><FONT FACE="ubuntu mono">-1</FONT></FONT>
+<FONT FACE="ubuntu mono">|&gt; </FONT><FONT COLOR="#00008b"><FONT FACE="ubuntu mono">dt_index</FONT></FONT><FONT FACE="ubuntu mono"><B>( </B></FONT><FONT COLOR="#444444"><FONT FACE="ubuntu mono"><I>[], &quot;xx&quot;</I></FONT></FONT> <FONT FACE="ubuntu mono"><B>)</B></FONT><FONT COLOR="#808080"><FONT FACE="ubuntu mono">= </FONT></FONT><FONT COLOR="#a52a2a"><FONT FACE="ubuntu mono">-1</FONT></FONT>
+<FONT FACE="ubuntu mono">|## String indexing ##</FONT>
+<FONT FACE="ubuntu mono">|&gt; </FONT><FONT COLOR="#00008b"><FONT FACE="ubuntu mono">dt_index</FONT></FONT><FONT FACE="ubuntu mono"><B>( </B></FONT><FONT COLOR="#444444"><FONT FACE="ubuntu mono"><I>arr2, &quot;a&quot;</I></FONT></FONT> <FONT FACE="ubuntu mono"><B>)</B></FONT><FONT COLOR="#808080"><FONT FACE="ubuntu mono">= </FONT></FONT><FONT COLOR="#a52a2a"><FONT FACE="ubuntu mono">2</FONT></FONT>
+<FONT FACE="ubuntu mono">|&gt; </FONT><FONT COLOR="#00008b"><FONT FACE="ubuntu mono">dt_index</FONT></FONT><FONT FACE="ubuntu mono"><B>( </B></FONT><FONT COLOR="#444444"><FONT FACE="ubuntu mono"><I>arr2, &quot;am&quot;</I></FONT></FONT> <FONT FACE="ubuntu mono"><B>)</B></FONT><FONT COLOR="#808080"><FONT FACE="ubuntu mono">= </FONT></FONT><FONT COLOR="#a52a2a"><FONT FACE="ubuntu mono">2</FONT></FONT>
+<FONT FACE="ubuntu mono">|&gt; </FONT><FONT COLOR="#00008b"><FONT FACE="ubuntu mono">dt_index</FONT></FONT><FONT FACE="ubuntu mono"><B>( </B></FONT><FONT COLOR="#444444"><FONT FACE="ubuntu mono"><I>&quot;abcdef&quot;,&quot;f&quot;</I></FONT></FONT> <FONT FACE="ubuntu mono"><B>)</B></FONT><FONT COLOR="#808080"><FONT FACE="ubuntu mono">= </FONT></FONT><FONT COLOR="#a52a2a"><FONT FACE="ubuntu mono">5</FONT></FONT>
+<FONT FACE="ubuntu mono">|&gt; </FONT><FONT COLOR="#00008b"><FONT FACE="ubuntu mono">dt_index</FONT></FONT><FONT FACE="ubuntu mono"><B>( </B></FONT><FONT COLOR="#444444"><FONT FACE="ubuntu mono"><I>&quot;findw&quot;,&quot;n&quot;</I></FONT></FONT> <FONT FACE="ubuntu mono"><B>)</B></FONT><FONT COLOR="#808080"><FONT FACE="ubuntu mono">= </FONT></FONT><FONT COLOR="#a52a2a"><FONT FACE="ubuntu mono">2</FONT></FONT>
+<FONT FACE="ubuntu mono">|&gt; </FONT><FONT COLOR="#00008b"><FONT FACE="ubuntu mono">dt_index</FONT></FONT><FONT FACE="ubuntu mono"><B>( </B></FONT><FONT COLOR="#444444"><FONT FACE="ubuntu mono"><I>arr2, &quot;find&quot;</I></FONT></FONT> <FONT FACE="ubuntu mono"><B>)</B></FONT><FONT COLOR="#808080"><FONT FACE="ubuntu mono">= </FONT></FONT><FONT COLOR="#a52a2a"><FONT FACE="ubuntu mono">9</FONT></FONT>
+<FONT FACE="ubuntu mono">|&gt; </FONT><FONT COLOR="#00008b"><FONT FACE="ubuntu mono">dt_index</FONT></FONT><FONT FACE="ubuntu mono"><B>( </B></FONT><FONT COLOR="#444444"><FONT FACE="ubuntu mono"><I>arr2, &quot;the&quot;</I></FONT></FONT> <FONT FACE="ubuntu mono"><B>)</B></FONT><FONT COLOR="#808080"><FONT FACE="ubuntu mono">= </FONT></FONT><FONT COLOR="#a52a2a"><FONT FACE="ubuntu mono">5</FONT></FONT>
+<FONT FACE="ubuntu mono">|&gt; </FONT><FONT COLOR="#00008b"><FONT FACE="ubuntu mono">dt_index</FONT></FONT><FONT FACE="ubuntu mono"><B>( </B></FONT><FONT COLOR="#444444"><FONT FACE="ubuntu mono"><I>arr2, &quot;findw&quot;</I></FONT></FONT> <FONT FACE="ubuntu mono"><B>)</B></FONT><FONT COLOR="#808080"><FONT FACE="ubuntu mono">= </FONT></FONT><FONT COLOR="#a52a2a"><FONT FACE="ubuntu mono">10</FONT></FONT>
+<FONT FACE="ubuntu mono">|&gt; </FONT><FONT COLOR="#00008b"><FONT FACE="ubuntu mono">dt_index</FONT></FONT><FONT FACE="ubuntu mono"><B>( </B></FONT><FONT COLOR="#444444"><FONT FACE="ubuntu mono"><I>&quot;findw&quot;, &quot;findw&quot;</I></FONT></FONT> <FONT FACE="ubuntu mono"><B>)</B></FONT><FONT COLOR="#808080"><FONT FACE="ubuntu mono">= </FONT></FONT><FONT COLOR="#a52a2a"><FONT FACE="ubuntu mono">0</FONT></FONT>
+<FONT FACE="ubuntu mono">|&gt; </FONT><FONT COLOR="#00008b"><FONT FACE="ubuntu mono">dt_index</FONT></FONT><FONT FACE="ubuntu mono"><B>( </B></FONT><FONT COLOR="#444444"><FONT FACE="ubuntu mono"><I>&quot;findw&quot;, &quot;dwi&quot;</I></FONT></FONT> <FONT FACE="ubuntu mono"><B>)</B></FONT><FONT COLOR="#808080"><FONT FACE="ubuntu mono">= </FONT></FONT><FONT COLOR="#a52a2a"><FONT FACE="ubuntu mono">-1</FONT></FONT>
+<FONT FACE="ubuntu mono">|&gt; </FONT><FONT COLOR="#00008b"><FONT FACE="ubuntu mono">dt_index</FONT></FONT><FONT FACE="ubuntu mono"><B>( </B></FONT><FONT COLOR="#444444"><FONT FACE="ubuntu mono"><I>arr2, &quot;The&quot;</I></FONT></FONT> <FONT FACE="ubuntu mono"><B>)</B></FONT><FONT COLOR="#808080"><FONT FACE="ubuntu mono">= </FONT></FONT><FONT COLOR="#a52a2a"><FONT FACE="ubuntu mono">-1</FONT></FONT>
+<FONT FACE="ubuntu mono">|&gt; </FONT><FONT COLOR="#00008b"><FONT FACE="ubuntu mono">dt_index</FONT></FONT><FONT FACE="ubuntu mono"><B>( </B></FONT><FONT COLOR="#444444"><FONT FACE="ubuntu mono"><I>arr2, &quot;tex&quot;</I></FONT></FONT> <FONT FACE="ubuntu mono"><B>)</B></FONT><FONT COLOR="#808080"><FONT FACE="ubuntu mono">= </FONT></FONT><FONT COLOR="#a52a2a"><FONT FACE="ubuntu mono">9</FONT></FONT>
+<FONT FACE="ubuntu mono">|&gt; </FONT><FONT COLOR="#00008b"><FONT FACE="ubuntu mono">dt_index</FONT></FONT><FONT FACE="ubuntu mono"><B>( </B></FONT><FONT COLOR="#444444"><FONT FACE="ubuntu mono"><I>&quot;replace__ttext&quot;, &quot;tex&quot;</I></FONT></FONT> <FONT FACE="ubuntu mono"><B>)</B></FONT><FONT COLOR="#808080"><FONT FACE="ubuntu mono">= </FONT></FONT><FONT COLOR="#a52a2a"><FONT FACE="ubuntu mono">10</FONT></FONT>
+<FONT FACE="ubuntu mono">|&gt; </FONT><FONT COLOR="#00008b"><FONT FACE="ubuntu mono">dt_index</FONT></FONT><FONT FACE="ubuntu mono"><B>( </B></FONT><FONT COLOR="#444444"><FONT FACE="ubuntu mono"><I>&quot;replace_t_text&quot;,&quot;tex&quot;</I></FONT></FONT> <FONT FACE="ubuntu mono"><B>)</B></FONT><FONT COLOR="#808080"><FONT FACE="ubuntu mono">= </FONT></FONT><FONT COLOR="#a52a2a"><FONT FACE="ubuntu mono">10</FONT></FONT>
+<FONT FACE="ubuntu mono">|&gt; </FONT><FONT COLOR="#00008b"><FONT FACE="ubuntu mono">dt_index</FONT></FONT><FONT FACE="ubuntu mono"><B>( </B></FONT><FONT COLOR="#444444"><FONT FACE="ubuntu mono"><I>&quot;abc&quot;, &quot;abcdef&quot;</I></FONT></FONT> <FONT FACE="ubuntu mono"><B>)</B></FONT><FONT COLOR="#808080"><FONT FACE="ubuntu mono">= </FONT></FONT><FONT COLOR="#a52a2a"><FONT FACE="ubuntu mono">-1</FONT></FONT>
+<FONT FACE="ubuntu mono">|&gt; </FONT><FONT COLOR="#00008b"><FONT FACE="ubuntu mono">dt_index</FONT></FONT><FONT FACE="ubuntu mono"><B>( </B></FONT><FONT COLOR="#444444"><FONT FACE="ubuntu mono"><I>&quot;&quot;, &quot;abcdef&quot;</I></FONT></FONT> <FONT FACE="ubuntu mono"><B>)</B></FONT><FONT COLOR="#808080"><FONT FACE="ubuntu mono">= </FONT></FONT><FONT COLOR="#a52a2a"><FONT FACE="ubuntu mono">-1</FONT></FONT>
+<FONT FACE="ubuntu mono">|&gt; </FONT><FONT COLOR="#00008b"><FONT FACE="ubuntu mono">dt_index</FONT></FONT><FONT FACE="ubuntu mono"><B>( </B></FONT><FONT COLOR="#444444"><FONT FACE="ubuntu mono"><I>&quot;&quot;, &quot;abc&quot;</I></FONT></FONT> <FONT FACE="ubuntu mono"><B>)</B></FONT><FONT COLOR="#808080"><FONT FACE="ubuntu mono">= </FONT></FONT><FONT COLOR="#a52a2a"><FONT FACE="ubuntu mono">-1</FONT></FONT>
+<FONT FACE="ubuntu mono">|## String indexing with wrap ##</FONT>
+<FONT FACE="ubuntu mono">|&gt; </FONT><FONT COLOR="#00008b"><FONT FACE="ubuntu mono">dt_index</FONT></FONT><FONT FACE="ubuntu mono"><B>( </B></FONT><FONT COLOR="#444444"><FONT FACE="ubuntu mono"><I>&quot;{a}bc&quot;,&quot;a&quot;, &quot;{,}&quot;</I></FONT></FONT> <FONT FACE="ubuntu mono"><B>)</B></FONT><FONT COLOR="#808080"><FONT FACE="ubuntu mono">= </FONT></FONT><FONT COLOR="#a52a2a"><FONT FACE="ubuntu mono">0</FONT></FONT>
+<FONT FACE="ubuntu mono">|&gt; </FONT><FONT COLOR="#00008b"><FONT FACE="ubuntu mono">dt_index</FONT></FONT><FONT FACE="ubuntu mono"><B>( </B></FONT><FONT COLOR="#444444"><FONT FACE="ubuntu mono"><I>&quot;a}bc&quot;,&quot;a&quot;, &quot;,}&quot;</I></FONT></FONT> <FONT FACE="ubuntu mono"><B>)</B></FONT><FONT COLOR="#808080"><FONT FACE="ubuntu mono">= </FONT></FONT><FONT COLOR="#a52a2a"><FONT FACE="ubuntu mono">0</FONT></FONT>
+<FONT FACE="ubuntu mono">|&gt; </FONT><FONT COLOR="#00008b"><FONT FACE="ubuntu mono">dt_index</FONT></FONT><FONT FACE="ubuntu mono"><B>( </B></FONT><FONT COLOR="#444444"><FONT FACE="ubuntu mono"><I>&quot;a{b}c&quot;,&quot;b&quot;, &quot;{,}&quot;</I></FONT></FONT> <FONT FACE="ubuntu mono"><B>)</B></FONT><FONT COLOR="#808080"><FONT FACE="ubuntu mono">= </FONT></FONT><FONT COLOR="#a52a2a"><FONT FACE="ubuntu mono">1</FONT></FONT>
+<FONT FACE="ubuntu mono">|&gt; </FONT><FONT COLOR="#00008b"><FONT FACE="ubuntu mono">dt_index</FONT></FONT><FONT FACE="ubuntu mono"><B>( </B></FONT><FONT COLOR="#444444"><FONT FACE="ubuntu mono"><I>&quot;a//bc&quot;,&quot;b&quot;, &quot;//,&quot;</I></FONT></FONT> <FONT FACE="ubuntu mono"><B>)</B></FONT><FONT COLOR="#808080"><FONT FACE="ubuntu mono">= </FONT></FONT><FONT COLOR="#a52a2a"><FONT FACE="ubuntu mono">1</FONT></FONT>
+<FONT FACE="ubuntu mono">|&gt; </FONT><FONT COLOR="#00008b"><FONT FACE="ubuntu mono">dt_index</FONT></FONT><FONT FACE="ubuntu mono"><B>( </B></FONT><FONT COLOR="#444444"><FONT FACE="ubuntu mono"><I>&quot;abc:d&quot;,&quot;c&quot;, &quot;,:&quot;</I></FONT></FONT> <FONT FACE="ubuntu mono"><B>)</B></FONT><FONT COLOR="#808080"><FONT FACE="ubuntu mono">= </FONT></FONT><FONT COLOR="#a52a2a"><FONT FACE="ubuntu mono">2</FONT></FONT>
+<FONT FACE="ubuntu mono">|&gt; </FONT><FONT COLOR="#00008b"><FONT FACE="ubuntu mono">dt_index</FONT></FONT><FONT FACE="ubuntu mono"><B>( </B></FONT><FONT COLOR="#444444"><FONT FACE="ubuntu mono"><I>&quot;a{_b_}{_c_}&quot;,&quot;c&quot;, &quot;{_,_}&quot;</I></FONT></FONT> <FONT FACE="ubuntu mono"><B>)</B></FONT><FONT COLOR="#808080"><FONT FACE="ubuntu mono">= </FONT></FONT><FONT COLOR="#a52a2a"><FONT FACE="ubuntu mono">6</FONT></FONT>
+<FONT FACE="ubuntu mono">|## Others ##</FONT>
+<FONT FACE="ubuntu mono">|&gt; </FONT><FONT COLOR="#00008b"><FONT FACE="ubuntu mono">dt_index</FONT></FONT><FONT FACE="ubuntu mono"><B>( </B></FONT><FONT COLOR="#444444"><FONT FACE="ubuntu mono"><I>[2, ,3, undef], undef</I></FONT></FONT> <FONT FACE="ubuntu mono"><B>)</B></FONT><FONT COLOR="#808080"><FONT FACE="ubuntu mono">= </FONT></FONT><FONT COLOR="#a52a2a"><FONT FACE="ubuntu mono">2</FONT></FONT></PRE><P STYLE="margin-bottom: 0in">
+<BR><FONT FACE="Courier New, courier">-----------------------------------------------------------------</FONT><U><BR></U><U><B>dt</B></U><FONT FACE="DejaVu Sans"><SPAN LANG="zh-CN"><U><FONT FACE="DejaVu Sans"><FONT SIZE=2><SPAN LANG="zh-CN"><B>＿</B></SPAN></FONT></FONT></U></SPAN></FONT><U><B>inrange</B></U><FONT COLOR="#008000"><U>
+( </U></FONT><FONT COLOR="#444444"><FONT FACE="ubuntu mono"><I><U>o,i</U></I></FONT></FONT><FONT COLOR="#008000"><U>
+)</U></FONT><FONT COLOR="#0000ff"><U>=</U></FONT><U>T|F ( tested:20 )</U></P>
+<PRE STYLE="margin-top: 0.05in; margin-bottom: 0.08in"><FONT FACE="ubuntu mono">| Check if index i is in range of o (a str|arr). i could be negative.</FONT>
+<FONT FACE="ubuntu mono">|</FONT>
+<FONT FACE="ubuntu mono">| </FONT><FONT FACE="ubuntu mono"><U>Tags:</U></FONT> <FONT FACE="ubuntu mono">dt_index, Array, String, Inspect</FONT>
+<FONT FACE="ubuntu mono">|</FONT>
+<FONT FACE="ubuntu mono">|</FONT><FONT FACE="ubuntu mono"><U>Tests:</U></FONT>
+<FONT FACE="ubuntu mono">|</FONT>
+<FONT FACE="ubuntu mono">|## string ##</FONT>
+<FONT FACE="ubuntu mono">|&gt; </FONT><FONT COLOR="#00008b"><FONT FACE="ubuntu mono">dt_inrange</FONT></FONT><FONT FACE="ubuntu mono"><B>( </B></FONT><FONT COLOR="#444444"><FONT FACE="ubuntu mono"><I>&quot;789&quot;,2</I></FONT></FONT> <FONT FACE="ubuntu mono"><B>)</B></FONT><FONT COLOR="#808080"><FONT FACE="ubuntu mono">= </FONT></FONT><FONT COLOR="#a52a2a"><FONT FACE="ubuntu mono">true</FONT></FONT>
+<FONT FACE="ubuntu mono">|&gt; </FONT><FONT COLOR="#00008b"><FONT FACE="ubuntu mono">dt_inrange</FONT></FONT><FONT FACE="ubuntu mono"><B>( </B></FONT><FONT COLOR="#444444"><FONT FACE="ubuntu mono"><I>&quot;789&quot;,3</I></FONT></FONT> <FONT FACE="ubuntu mono"><B>)</B></FONT><FONT COLOR="#808080"><FONT FACE="ubuntu mono">= </FONT></FONT><FONT COLOR="#a52a2a"><FONT FACE="ubuntu mono">false</FONT></FONT>
+<FONT FACE="ubuntu mono">|&gt; </FONT><FONT COLOR="#00008b"><FONT FACE="ubuntu mono">dt_inrange</FONT></FONT><FONT FACE="ubuntu mono"><B>( </B></FONT><FONT COLOR="#444444"><FONT FACE="ubuntu mono"><I>&quot;789&quot;,-2</I></FONT></FONT> <FONT FACE="ubuntu mono"><B>)</B></FONT><FONT COLOR="#808080"><FONT FACE="ubuntu mono">= </FONT></FONT><FONT COLOR="#a52a2a"><FONT FACE="ubuntu mono">true</FONT></FONT>
+<FONT FACE="ubuntu mono">|&gt; </FONT><FONT COLOR="#00008b"><FONT FACE="ubuntu mono">dt_inrange</FONT></FONT><FONT FACE="ubuntu mono"><B>( </B></FONT><FONT COLOR="#444444"><FONT FACE="ubuntu mono"><I>&quot;789&quot;,-3</I></FONT></FONT> <FONT FACE="ubuntu mono"><B>)</B></FONT><FONT COLOR="#808080"><FONT FACE="ubuntu mono">= </FONT></FONT><FONT COLOR="#a52a2a"><FONT FACE="ubuntu mono">true</FONT></FONT>
+<FONT FACE="ubuntu mono">|&gt; </FONT><FONT COLOR="#00008b"><FONT FACE="ubuntu mono">dt_inrange</FONT></FONT><FONT FACE="ubuntu mono"><B>( </B></FONT><FONT COLOR="#444444"><FONT FACE="ubuntu mono"><I>&quot;789&quot;,-4</I></FONT></FONT> <FONT FACE="ubuntu mono"><B>)</B></FONT><FONT COLOR="#808080"><FONT FACE="ubuntu mono">= </FONT></FONT><FONT COLOR="#a52a2a"><FONT FACE="ubuntu mono">false</FONT></FONT>
+<FONT FACE="ubuntu mono">|&gt; </FONT><FONT COLOR="#00008b"><FONT FACE="ubuntu mono">dt_inrange</FONT></FONT><FONT FACE="ubuntu mono"><B>( </B></FONT><FONT COLOR="#444444"><FONT FACE="ubuntu mono"><I>&quot;,0</I></FONT></FONT> <FONT FACE="ubuntu mono"><B>)</B></FONT><FONT COLOR="#808080"><FONT FACE="ubuntu mono">= </FONT></FONT><FONT COLOR="#a52a2a"><FONT FACE="ubuntu mono">false</FONT></FONT>
+<FONT FACE="ubuntu mono">|&gt; </FONT><FONT COLOR="#00008b"><FONT FACE="ubuntu mono">dt_inrange</FONT></FONT><FONT FACE="ubuntu mono"><B>( </B></FONT><FONT COLOR="#444444"><FONT FACE="ubuntu mono"><I>&quot;789&quot;,&quot;a&quot;</I></FONT></FONT> <FONT FACE="ubuntu mono"><B>)</B></FONT><FONT COLOR="#808080"><FONT FACE="ubuntu mono">= </FONT></FONT><FONT COLOR="#a52a2a"><FONT FACE="ubuntu mono">false</FONT></FONT>
+<FONT FACE="ubuntu mono">|&gt; </FONT><FONT COLOR="#00008b"><FONT FACE="ubuntu mono">dt_inrange</FONT></FONT><FONT FACE="ubuntu mono"><B>( </B></FONT><FONT COLOR="#444444"><FONT FACE="ubuntu mono"><I>&quot;789&quot;,true</I></FONT></FONT> <FONT FACE="ubuntu mono"><B>)</B></FONT><FONT COLOR="#808080"><FONT FACE="ubuntu mono">= </FONT></FONT><FONT COLOR="#a52a2a"><FONT FACE="ubuntu mono">false</FONT></FONT>
+<FONT FACE="ubuntu mono">|&gt; </FONT><FONT COLOR="#00008b"><FONT FACE="ubuntu mono">dt_inrange</FONT></FONT><FONT FACE="ubuntu mono"><B>( </B></FONT><FONT COLOR="#444444"><FONT FACE="ubuntu mono"><I>&quot;789&quot;,[3]</I></FONT></FONT> <FONT FACE="ubuntu mono"><B>)</B></FONT><FONT COLOR="#808080"><FONT FACE="ubuntu mono">= </FONT></FONT><FONT COLOR="#a52a2a"><FONT FACE="ubuntu mono">false</FONT></FONT>
+<FONT FACE="ubuntu mono">|&gt; </FONT><FONT COLOR="#00008b"><FONT FACE="ubuntu mono">dt_inrange</FONT></FONT><FONT FACE="ubuntu mono"><B>( </B></FONT><FONT COLOR="#444444"><FONT FACE="ubuntu mono"><I>&quot;789&quot;,undef</I></FONT></FONT> <FONT FACE="ubuntu mono"><B>)</B></FONT><FONT COLOR="#808080"><FONT FACE="ubuntu mono">= </FONT></FONT><FONT COLOR="#a52a2a"><FONT FACE="ubuntu mono">false</FONT></FONT>
+<FONT FACE="ubuntu mono">|## array ##</FONT>
+<FONT FACE="ubuntu mono">|&gt; </FONT><FONT COLOR="#00008b"><FONT FACE="ubuntu mono">dt_inrange</FONT></FONT><FONT FACE="ubuntu mono"><B>( </B></FONT><FONT COLOR="#444444"><FONT FACE="ubuntu mono"><I>[7,8,9],2</I></FONT></FONT> <FONT FACE="ubuntu mono"><B>)</B></FONT><FONT COLOR="#808080"><FONT FACE="ubuntu mono">= </FONT></FONT><FONT COLOR="#a52a2a"><FONT FACE="ubuntu mono">true</FONT></FONT>
+<FONT FACE="ubuntu mono">|&gt; </FONT><FONT COLOR="#00008b"><FONT FACE="ubuntu mono">dt_inrange</FONT></FONT><FONT FACE="ubuntu mono"><B>( </B></FONT><FONT COLOR="#444444"><FONT FACE="ubuntu mono"><I>[7,8,9],3</I></FONT></FONT> <FONT FACE="ubuntu mono"><B>)</B></FONT><FONT COLOR="#808080"><FONT FACE="ubuntu mono">= </FONT></FONT><FONT COLOR="#a52a2a"><FONT FACE="ubuntu mono">false</FONT></FONT>
+<FONT FACE="ubuntu mono">|&gt; </FONT><FONT COLOR="#00008b"><FONT FACE="ubuntu mono">dt_inrange</FONT></FONT><FONT FACE="ubuntu mono"><B>( </B></FONT><FONT COLOR="#444444"><FONT FACE="ubuntu mono"><I>[7,8,9],-2</I></FONT></FONT> <FONT FACE="ubuntu mono"><B>)</B></FONT><FONT COLOR="#808080"><FONT FACE="ubuntu mono">= </FONT></FONT><FONT COLOR="#a52a2a"><FONT FACE="ubuntu mono">true</FONT></FONT>
+<FONT FACE="ubuntu mono">|&gt; </FONT><FONT COLOR="#00008b"><FONT FACE="ubuntu mono">dt_inrange</FONT></FONT><FONT FACE="ubuntu mono"><B>( </B></FONT><FONT COLOR="#444444"><FONT FACE="ubuntu mono"><I>[7,8,9],-3</I></FONT></FONT> <FONT FACE="ubuntu mono"><B>)</B></FONT><FONT COLOR="#808080"><FONT FACE="ubuntu mono">= </FONT></FONT><FONT COLOR="#a52a2a"><FONT FACE="ubuntu mono">true</FONT></FONT>
+<FONT FACE="ubuntu mono">|&gt; </FONT><FONT COLOR="#00008b"><FONT FACE="ubuntu mono">dt_inrange</FONT></FONT><FONT FACE="ubuntu mono"><B>( </B></FONT><FONT COLOR="#444444"><FONT FACE="ubuntu mono"><I>[7,8,9],-4</I></FONT></FONT> <FONT FACE="ubuntu mono"><B>)</B></FONT><FONT COLOR="#808080"><FONT FACE="ubuntu mono">= </FONT></FONT><FONT COLOR="#a52a2a"><FONT FACE="ubuntu mono">false</FONT></FONT>
+<FONT FACE="ubuntu mono">|&gt; </FONT><FONT COLOR="#00008b"><FONT FACE="ubuntu mono">dt_inrange</FONT></FONT><FONT FACE="ubuntu mono"><B>( </B></FONT><FONT COLOR="#444444"><FONT FACE="ubuntu mono"><I>[],0</I></FONT></FONT> <FONT FACE="ubuntu mono"><B>)</B></FONT><FONT COLOR="#808080"><FONT FACE="ubuntu mono">= </FONT></FONT><FONT COLOR="#a52a2a"><FONT FACE="ubuntu mono">false</FONT></FONT>
+<FONT FACE="ubuntu mono">|&gt; </FONT><FONT COLOR="#00008b"><FONT FACE="ubuntu mono">dt_inrange</FONT></FONT><FONT FACE="ubuntu mono"><B>( </B></FONT><FONT COLOR="#444444"><FONT FACE="ubuntu mono"><I>[7,8,9],&quot;a&quot;</I></FONT></FONT> <FONT FACE="ubuntu mono"><B>)</B></FONT><FONT COLOR="#808080"><FONT FACE="ubuntu mono">= </FONT></FONT><FONT COLOR="#a52a2a"><FONT FACE="ubuntu mono">false</FONT></FONT>
+<FONT FACE="ubuntu mono">|&gt; </FONT><FONT COLOR="#00008b"><FONT FACE="ubuntu mono">dt_inrange</FONT></FONT><FONT FACE="ubuntu mono"><B>( </B></FONT><FONT COLOR="#444444"><FONT FACE="ubuntu mono"><I>[7,8,9],true</I></FONT></FONT> <FONT FACE="ubuntu mono"><B>)</B></FONT><FONT COLOR="#808080"><FONT FACE="ubuntu mono">= </FONT></FONT><FONT COLOR="#a52a2a"><FONT FACE="ubuntu mono">false</FONT></FONT>
+<FONT FACE="ubuntu mono">|&gt; </FONT><FONT COLOR="#00008b"><FONT FACE="ubuntu mono">dt_inrange</FONT></FONT><FONT FACE="ubuntu mono"><B>( </B></FONT><FONT COLOR="#444444"><FONT FACE="ubuntu mono"><I>[7,8,9],[3]</I></FONT></FONT> <FONT FACE="ubuntu mono"><B>)</B></FONT><FONT COLOR="#808080"><FONT FACE="ubuntu mono">= </FONT></FONT><FONT COLOR="#a52a2a"><FONT FACE="ubuntu mono">false</FONT></FONT>
+<FONT FACE="ubuntu mono">|&gt; </FONT><FONT COLOR="#00008b"><FONT FACE="ubuntu mono">dt_inrange</FONT></FONT><FONT FACE="ubuntu mono"><B>( </B></FONT><FONT COLOR="#444444"><FONT FACE="ubuntu mono"><I>[7,8,9],undef</I></FONT></FONT> <FONT FACE="ubuntu mono"><B>)</B></FONT><FONT COLOR="#808080"><FONT FACE="ubuntu mono">= </FONT></FONT><FONT COLOR="#a52a2a"><FONT FACE="ubuntu mono">false</FONT></FONT></PRE><P STYLE="margin-bottom: 0in">
+<BR>
+</P>
+<P STYLE="margin-bottom: 0in"><FONT FACE="Courier New, courier">-----------------------------------------------------------------</FONT><U><BR></U><U><B>dt</B></U><FONT FACE="DejaVu Sans"><SPAN LANG="zh-CN"><U><FONT FACE="DejaVu Sans"><FONT SIZE=2><SPAN LANG="zh-CN"><B>＿</B></SPAN></FONT></FONT></U></SPAN></FONT><U><B>isarr</B></U><FONT COLOR="#008000"><U>
+( </U></FONT><FONT COLOR="#444444"><FONT FACE="ubuntu mono"><I><U>x</U></I></FONT></FONT><FONT COLOR="#008000"><U>
+)</U></FONT><FONT COLOR="#0000ff"><U>=</U></FONT><U>T|F ( tested:5 )</U></P>
+<PRE STYLE="margin-top: 0.05in; margin-bottom: 0.08in"><FONT FACE="ubuntu mono">| Given x, return true if x is an array.</FONT>
+<FONT FACE="ubuntu mono">|</FONT>
+<FONT FACE="ubuntu mono">| </FONT><FONT FACE="ubuntu mono"><U>Tags:</U></FONT> <FONT FACE="ubuntu mono">dt_type, Inspect, Array</FONT>
+<FONT FACE="ubuntu mono">|</FONT>
+<FONT FACE="ubuntu mono">|</FONT><FONT FACE="ubuntu mono"><U>Tests:</U></FONT>
+<FONT FACE="ubuntu mono">|</FONT>
+<FONT FACE="ubuntu mono">|&gt; </FONT><FONT COLOR="#00008b"><FONT FACE="ubuntu mono">dt_isarr</FONT></FONT><FONT FACE="ubuntu mono"><B>( </B></FONT><FONT COLOR="#444444"><FONT FACE="ubuntu mono"><I>[1,2,3]</I></FONT></FONT> <FONT FACE="ubuntu mono"><B>)</B></FONT><FONT COLOR="#808080"><FONT FACE="ubuntu mono">= </FONT></FONT><FONT COLOR="#a52a2a"><FONT FACE="ubuntu mono">true</FONT></FONT>
+<FONT FACE="ubuntu mono">|&gt; </FONT><FONT COLOR="#00008b"><FONT FACE="ubuntu mono">dt_isarr</FONT></FONT><FONT FACE="ubuntu mono"><B>( </B></FONT><FONT COLOR="#444444"><FONT FACE="ubuntu mono"><I>&quot;a&quot;</I></FONT></FONT> <FONT FACE="ubuntu mono"><B>)</B></FONT><FONT COLOR="#808080"><FONT FACE="ubuntu mono">= </FONT></FONT><FONT COLOR="#a52a2a"><FONT FACE="ubuntu mono">false</FONT></FONT>
+<FONT FACE="ubuntu mono">|&gt; </FONT><FONT COLOR="#00008b"><FONT FACE="ubuntu mono">dt_isarr</FONT></FONT><FONT FACE="ubuntu mono"><B>( </B></FONT><FONT COLOR="#444444"><FONT FACE="ubuntu mono"><I>true</I></FONT></FONT> <FONT FACE="ubuntu mono"><B>)</B></FONT><FONT COLOR="#808080"><FONT FACE="ubuntu mono">= </FONT></FONT><FONT COLOR="#a52a2a"><FONT FACE="ubuntu mono">false</FONT></FONT>
+<FONT FACE="ubuntu mono">|&gt; </FONT><FONT COLOR="#00008b"><FONT FACE="ubuntu mono">dt_isarr</FONT></FONT><FONT FACE="ubuntu mono"><B>( </B></FONT><FONT COLOR="#444444"><FONT FACE="ubuntu mono"><I>false</I></FONT></FONT> <FONT FACE="ubuntu mono"><B>)</B></FONT><FONT COLOR="#808080"><FONT FACE="ubuntu mono">= </FONT></FONT><FONT COLOR="#a52a2a"><FONT FACE="ubuntu mono">false</FONT></FONT>
+<FONT FACE="ubuntu mono">|&gt; </FONT><FONT COLOR="#00008b"><FONT FACE="ubuntu mono">dt_isarr</FONT></FONT><FONT FACE="ubuntu mono"><B>( </B></FONT><FONT COLOR="#444444"><FONT FACE="ubuntu mono"><I>undef</I></FONT></FONT> <FONT FACE="ubuntu mono"><B>)</B></FONT><FONT COLOR="#808080"><FONT FACE="ubuntu mono">= </FONT></FONT><FONT COLOR="#a52a2a"><FONT FACE="ubuntu mono">false</FONT></FONT></PRE><P STYLE="margin-bottom: 0in">
+<BR><FONT FACE="Courier New, courier">-----------------------------------------------------------------</FONT><U><BR></U><U><B>dt</B></U><FONT FACE="DejaVu Sans"><SPAN LANG="zh-CN"><U><FONT FACE="DejaVu Sans"><FONT SIZE=2><SPAN LANG="zh-CN"><B>＿</B></SPAN></FONT></FONT></U></SPAN></FONT><U><B>isequal</B></U><FONT COLOR="#008000"><U>
+( </U></FONT><FONT COLOR="#444444"><FONT FACE="ubuntu mono"><I><U>a,b</U></I></FONT></FONT><FONT COLOR="#008000"><U>
+)</U></FONT><FONT COLOR="#0000ff"><U>=</U></FONT><U>T|F</U></P>
+<PRE STYLE="margin-top: 0.05in; margin-bottom: 0.08in"><FONT FACE="ubuntu mono">| Given 2 numbers a and b, return true if they are determined to</FONT>
+<FONT FACE="ubuntu mono">| be the same value. This is needed because sometimes a calculation</FONT>
+<FONT FACE="ubuntu mono">| that should return 0 ends up with something like 0.0000000000102.</FONT>
+<FONT FACE="ubuntu mono">| So it fails to compare with 0.0000000000104 (another shoulda-been</FONT>
+<FONT FACE="ubuntu mono">| 0) correctly. This function checks if abs(a-b) is smaller than the</FONT>
+<FONT FACE="ubuntu mono">| predifined DT_ZERO constant (1e-13) and return true if it is.</FONT>
+<FONT FACE="ubuntu mono">|</FONT>
+<FONT FACE="ubuntu mono">| </FONT><FONT FACE="ubuntu mono"><U>Tags:</U></FONT> <FONT FACE="ubuntu mono">Inspect</FONT></PRE><P STYLE="margin-bottom: 0in">
+<BR><FONT FACE="Courier New, courier">-----------------------------------------------------------------</FONT><U><BR></U><U><B>dt</B></U><FONT FACE="DejaVu Sans"><SPAN LANG="zh-CN"><U><FONT FACE="DejaVu Sans"><FONT SIZE=2><SPAN LANG="zh-CN"><B>＿</B></SPAN></FONT></FONT></U></SPAN></FONT><U><B>isint</B></U><FONT COLOR="#008000"><U>
+( </U></FONT><FONT COLOR="#444444"><FONT FACE="ubuntu mono"><I><U>x</U></I></FONT></FONT><FONT COLOR="#008000"><U>
+)</U></FONT><FONT COLOR="#0000ff"><U>=</U></FONT><U>T|F ( tested:3 )</U></P>
+<PRE STYLE="margin-top: 0.05in; margin-bottom: 0.08in"><FONT FACE="ubuntu mono">| Check if x is an integer.</FONT>
+<FONT FACE="ubuntu mono">|</FONT>
+<FONT FACE="ubuntu mono">| </FONT><FONT FACE="ubuntu mono"><U>Tags:</U></FONT> <FONT FACE="ubuntu mono">dt_type,Inspect, Number</FONT>
+<FONT FACE="ubuntu mono">|</FONT>
+<FONT FACE="ubuntu mono">|</FONT><FONT FACE="ubuntu mono"><U>Tests:</U></FONT>
+<FONT FACE="ubuntu mono">|</FONT>
+<FONT FACE="ubuntu mono">|&gt; </FONT><FONT COLOR="#00008b"><FONT FACE="ubuntu mono">dt_isint</FONT></FONT><FONT FACE="ubuntu mono"><B>( </B></FONT><FONT COLOR="#444444"><FONT FACE="ubuntu mono"><I>3</I></FONT></FONT> <FONT FACE="ubuntu mono"><B>)</B></FONT><FONT COLOR="#808080"><FONT FACE="ubuntu mono">= </FONT></FONT><FONT COLOR="#a52a2a"><FONT FACE="ubuntu mono">true</FONT></FONT>
+<FONT FACE="ubuntu mono">|&gt; </FONT><FONT COLOR="#00008b"><FONT FACE="ubuntu mono">dt_isint</FONT></FONT><FONT FACE="ubuntu mono"><B>( </B></FONT><FONT COLOR="#444444"><FONT FACE="ubuntu mono"><I>3.2</I></FONT></FONT> <FONT FACE="ubuntu mono"><B>)</B></FONT><FONT COLOR="#808080"><FONT FACE="ubuntu mono">= </FONT></FONT><FONT COLOR="#a52a2a"><FONT FACE="ubuntu mono">false</FONT></FONT>
+<FONT FACE="ubuntu mono">|&gt; </FONT><FONT COLOR="#00008b"><FONT FACE="ubuntu mono">dt_isint</FONT></FONT><FONT FACE="ubuntu mono"><B>( </B></FONT><FONT COLOR="#444444"><FONT FACE="ubuntu mono"><I>&quot;a&quot;</I></FONT></FONT> <FONT FACE="ubuntu mono"><B>)</B></FONT><FONT COLOR="#808080"><FONT FACE="ubuntu mono">= </FONT></FONT><FONT COLOR="#a52a2a"><FONT FACE="ubuntu mono">false</FONT></FONT></PRE><P STYLE="margin-bottom: 0in">
+<BR><FONT FACE="Courier New, courier">-----------------------------------------------------------------</FONT><U><BR></U><U><B>dt</B></U><FONT FACE="DejaVu Sans"><SPAN LANG="zh-CN"><U><FONT FACE="DejaVu Sans"><FONT SIZE=2><SPAN LANG="zh-CN"><B>＿</B></SPAN></FONT></FONT></U></SPAN></FONT><U><B>isnum</B></U><FONT COLOR="#008000"><U>
+( </U></FONT><FONT COLOR="#444444"><FONT FACE="ubuntu mono"><I><U>x</U></I></FONT></FONT><FONT COLOR="#008000"><U>
+)</U></FONT><FONT COLOR="#0000ff"><U>=</U></FONT><U>T|F ( tested:3 )</U></P>
+<PRE STYLE="margin-top: 0.05in; margin-bottom: 0.08in"><FONT FACE="ubuntu mono">| Check if x is a number.</FONT>
+<FONT FACE="ubuntu mono">|</FONT>
+<FONT FACE="ubuntu mono">| </FONT><FONT FACE="ubuntu mono"><U>Tags:</U></FONT> <FONT FACE="ubuntu mono">Type,Inspect,Number</FONT>
+<FONT FACE="ubuntu mono">|</FONT>
+<FONT FACE="ubuntu mono">|</FONT><FONT FACE="ubuntu mono"><U>Tests:</U></FONT>
+<FONT FACE="ubuntu mono">|</FONT>
+<FONT FACE="ubuntu mono">|&gt; </FONT><FONT COLOR="#00008b"><FONT FACE="ubuntu mono">dt_isnum</FONT></FONT><FONT FACE="ubuntu mono"><B>( </B></FONT><FONT COLOR="#444444"><FONT FACE="ubuntu mono"><I>3</I></FONT></FONT> <FONT FACE="ubuntu mono"><B>)</B></FONT><FONT COLOR="#808080"><FONT FACE="ubuntu mono">= </FONT></FONT><FONT COLOR="#a52a2a"><FONT FACE="ubuntu mono">true</FONT></FONT>
+<FONT FACE="ubuntu mono">|&gt; </FONT><FONT COLOR="#00008b"><FONT FACE="ubuntu mono">dt_isnum</FONT></FONT><FONT FACE="ubuntu mono"><B>( </B></FONT><FONT COLOR="#444444"><FONT FACE="ubuntu mono"><I>3.2</I></FONT></FONT> <FONT FACE="ubuntu mono"><B>)</B></FONT><FONT COLOR="#808080"><FONT FACE="ubuntu mono">= </FONT></FONT><FONT COLOR="#a52a2a"><FONT FACE="ubuntu mono">true</FONT></FONT>
+<FONT FACE="ubuntu mono">|&gt; </FONT><FONT COLOR="#00008b"><FONT FACE="ubuntu mono">dt_isnum</FONT></FONT><FONT FACE="ubuntu mono"><B>( </B></FONT><FONT COLOR="#444444"><FONT FACE="ubuntu mono"><I>&quot;a&quot;</I></FONT></FONT> <FONT FACE="ubuntu mono"><B>)</B></FONT><FONT COLOR="#808080"><FONT FACE="ubuntu mono">= </FONT></FONT><FONT COLOR="#a52a2a"><FONT FACE="ubuntu mono">false</FONT></FONT></PRE><P STYLE="margin-bottom: 0in">
+<BR><FONT FACE="Courier New, courier">-----------------------------------------------------------------</FONT><U><BR></U><U><B>dt</B></U><FONT FACE="DejaVu Sans"><SPAN LANG="zh-CN"><U><FONT FACE="DejaVu Sans"><FONT SIZE=2><SPAN LANG="zh-CN"><B>＿</B></SPAN></FONT></FONT></U></SPAN></FONT><U><B>isstr</B></U><FONT COLOR="#008000"><U>
+( </U></FONT><FONT COLOR="#444444"><FONT FACE="ubuntu mono"><I><U>x</U></I></FONT></FONT><FONT COLOR="#008000"><U>
+)</U></FONT><FONT COLOR="#0000ff"><U>=</U></FONT><U>T|F ( tested:3 )</U></P>
+<PRE STYLE="margin-top: 0.05in; margin-bottom: 0.08in"><FONT FACE="ubuntu mono">| Check if x is a string.</FONT>
+<FONT FACE="ubuntu mono">|</FONT>
+<FONT FACE="ubuntu mono">| </FONT><FONT FACE="ubuntu mono"><U>Tags:</U></FONT> <FONT FACE="ubuntu mono">dt_type,String,Inspect</FONT>
+<FONT FACE="ubuntu mono">|</FONT>
+<FONT FACE="ubuntu mono">|</FONT><FONT FACE="ubuntu mono"><U>Tests:</U></FONT>
+<FONT FACE="ubuntu mono">|</FONT>
+<FONT FACE="ubuntu mono">|&gt; </FONT><FONT COLOR="#00008b"><FONT FACE="ubuntu mono">dt_isstr</FONT></FONT><FONT FACE="ubuntu mono"><B>( </B></FONT><FONT COLOR="#444444"><FONT FACE="ubuntu mono"><I>3</I></FONT></FONT> <FONT FACE="ubuntu mono"><B>)</B></FONT><FONT COLOR="#808080"><FONT FACE="ubuntu mono">= </FONT></FONT><FONT COLOR="#a52a2a"><FONT FACE="ubuntu mono">false</FONT></FONT>
+<FONT FACE="ubuntu mono">|&gt; </FONT><FONT COLOR="#00008b"><FONT FACE="ubuntu mono">dt_isstr</FONT></FONT><FONT FACE="ubuntu mono"><B>( </B></FONT><FONT COLOR="#444444"><FONT FACE="ubuntu mono"><I>3.2</I></FONT></FONT> <FONT FACE="ubuntu mono"><B>)</B></FONT><FONT COLOR="#808080"><FONT FACE="ubuntu mono">= </FONT></FONT><FONT COLOR="#a52a2a"><FONT FACE="ubuntu mono">false</FONT></FONT>
+<FONT FACE="ubuntu mono">|&gt; </FONT><FONT COLOR="#00008b"><FONT FACE="ubuntu mono">dt_isstr</FONT></FONT><FONT FACE="ubuntu mono"><B>( </B></FONT><FONT COLOR="#444444"><FONT FACE="ubuntu mono"><I>&quot;a&quot;</I></FONT></FONT> <FONT FACE="ubuntu mono"><B>)</B></FONT><FONT COLOR="#808080"><FONT FACE="ubuntu mono">= </FONT></FONT><FONT COLOR="#a52a2a"><FONT FACE="ubuntu mono">true</FONT></FONT></PRE><P STYLE="margin-bottom: 0in">
+<BR>
+</P>
+<P STYLE="margin-bottom: 0in"><FONT FACE="Courier New, courier">-----------------------------------------------------------------</FONT><U><BR></U><FONT COLOR="#ff0000"><U><B>dt</B></U></FONT><FONT FACE="DejaVu Sans"><SPAN LANG="zh-CN"><FONT COLOR="#ff0000"><U><FONT FACE="DejaVu Sans"><FONT SIZE=2><SPAN LANG="zh-CN"><B>＿</B></SPAN></FONT></FONT></U></FONT></SPAN></FONT><FONT COLOR="#ff0000"><U><B>join</B></U></FONT><FONT COLOR="#008000"><U>
+( </U></FONT><FONT COLOR="#444444"><FONT FACE="ubuntu mono"><I><U>arr,
+sp=&quot;,&quot;</U></I></FONT></FONT><FONT COLOR="#008000"><U>
+)</U></FONT><FONT COLOR="#0000ff"><U>=</U></FONT><U>string (
+tested:5</U><FONT COLOR="#ff0000"><U>/failed:1</U></FONT><U> )</U></P>
+<PRE STYLE="margin-top: 0.05in; margin-bottom: 0.08in"><FONT FACE="ubuntu mono">| join items of arr into a string, separated by sp.</FONT>
+<FONT FACE="ubuntu mono">|</FONT>
+<FONT FACE="ubuntu mono">| </FONT><FONT FACE="ubuntu mono"><U>Tags:</U></FONT> <FONT FACE="ubuntu mono">Array</FONT>
+<FONT FACE="ubuntu mono">|</FONT>
+<FONT FACE="ubuntu mono">|</FONT><FONT FACE="ubuntu mono"><U>Tests:</U></FONT>
+<FONT FACE="ubuntu mono">|</FONT>
+<FONT FACE="ubuntu mono">|&gt; </FONT><FONT COLOR="#00008b"><FONT FACE="ubuntu mono">dt_join</FONT></FONT><FONT FACE="ubuntu mono"><B>( </B></FONT><FONT COLOR="#444444"><FONT FACE="ubuntu mono"><I>[2,3,4]</I></FONT></FONT> <FONT FACE="ubuntu mono"><B>)</B></FONT><FONT COLOR="#808080"><FONT FACE="ubuntu mono">= </FONT></FONT><FONT COLOR="#800080"><FONT FACE="ubuntu mono">&quot;2,3,4&quot;</FONT></FONT><FONT COLOR="#008000"> </FONT><FONT COLOR="#008000"><FONT FACE="ubuntu mono">// default sp=&quot;,&quot;</FONT></FONT>
+<FONT FACE="ubuntu mono">|&gt; </FONT><FONT COLOR="#00008b"><FONT FACE="ubuntu mono">dt_join</FONT></FONT><FONT FACE="ubuntu mono"><B>( </B></FONT><FONT COLOR="#444444"><FONT FACE="ubuntu mono"><I>[2,3,4], &quot;|&quot;</I></FONT></FONT> <FONT FACE="ubuntu mono"><B>)</B></FONT><FONT COLOR="#808080"><FONT FACE="ubuntu mono">= </FONT></FONT><FONT COLOR="#800080"><FONT FACE="ubuntu mono">&quot;2|3|4&quot;</FONT></FONT>
+<FONT FACE="ubuntu mono">|&gt; </FONT><FONT COLOR="#00008b"><FONT FACE="ubuntu mono">dt_join</FONT></FONT><FONT FACE="ubuntu mono"><B>( </B></FONT><FONT COLOR="#444444"><FONT FACE="ubuntu mono"><I>[2,[5,1],&quot;a&quot;], &quot;/&quot;</I></FONT></FONT> <FONT FACE="ubuntu mono"><B>)</B></FONT><FONT COLOR="#808080"><FONT FACE="ubuntu mono">= </FONT></FONT><FONT COLOR="#800080"><FONT FACE="ubuntu mono">&quot;2/[5,1]/a&quot;</FONT></FONT>
+<FONT FACE="ubuntu mono">|&gt; </FONT><FONT COLOR="#00008b"><FONT FACE="ubuntu mono">dt_join</FONT></FONT><FONT FACE="ubuntu mono"><B>( </B></FONT><FONT COLOR="#444444"><FONT FACE="ubuntu mono"><I>[], &quot;|&quot;</I></FONT></FONT> <FONT FACE="ubuntu mono"><B>)</B></FONT><FONT COLOR="#808080"><FONT FACE="ubuntu mono">= </FONT></FONT><FONT COLOR="#800080"><FONT FACE="ubuntu mono">&quot;&quot;</FONT></FONT>
+<FONT FACE="ubuntu mono">|</FONT><FONT COLOR="#008b8b"><FONT FACE="ubuntu mono">// The following are intentionally given wrong anwsers </FONT></FONT>
+<FONT FACE="ubuntu mono">|</FONT><FONT COLOR="#008b8b"><FONT FACE="ubuntu mono">// to test the error reporting capability.</FONT></FONT>
+<FONT FACE="ubuntu mono">|&gt; </FONT><FONT COLOR="#00008b"><FONT FACE="ubuntu mono">dt_join</FONT></FONT><FONT FACE="ubuntu mono"><B>( </B></FONT><FONT COLOR="#444444"><FONT FACE="ubuntu mono"><I>[2,3,4], &quot;|&quot;</I></FONT></FONT> <FONT FACE="ubuntu mono"><B>)</B></FONT><FONT COLOR="#808080"><FONT FACE="ubuntu mono">= </FONT></FONT><FONT COLOR="#800080"><FONT FACE="ubuntu mono">&quot;2,3,4&quot;</FONT></FONT> <FONT FACE="ubuntu mono">got: </FONT><FONT COLOR="#800080"><FONT FACE="ubuntu mono">&quot;2|3|4&quot;</FONT></FONT><FONT COLOR="#ff0000"> </FONT><FONT COLOR="#ff0000"><FONT FACE="ubuntu mono">#FAIL#</FONT></FONT></PRE><P STYLE="margin-bottom: 0in">
+<BR>
+</P>
+<P STYLE="margin-bottom: 0in"><FONT FACE="Courier New, courier">-----------------------------------------------------------------</FONT><U><BR></U><U><B>dt</B></U><FONT FACE="DejaVu Sans"><SPAN LANG="zh-CN"><U><FONT FACE="DejaVu Sans"><FONT SIZE=2><SPAN LANG="zh-CN"><B>＿</B></SPAN></FONT></FONT></U></SPAN></FONT><U><B>keys</B></U><FONT COLOR="#008000"><U>
+( </U></FONT><FONT COLOR="#444444"><FONT FACE="ubuntu mono"><I><U>h</U></I></FONT></FONT><FONT COLOR="#008000"><U>
+)</U></FONT><FONT COLOR="#0000ff"><U>=</U></FONT><U>array ( tested:4
+)</U></P>
+<PRE STYLE="margin-top: 0.05in; margin-bottom: 0.08in"><FONT FACE="ubuntu mono">| Given a hash (h), return keys of h as an array.</FONT>
+<FONT FACE="ubuntu mono">|</FONT>
+<FONT FACE="ubuntu mono">| </FONT><FONT FACE="ubuntu mono"><U>Tags:</U></FONT> <FONT FACE="ubuntu mono">Hash</FONT>
+<FONT FACE="ubuntu mono">|</FONT>
+<FONT FACE="ubuntu mono">|</FONT><FONT FACE="ubuntu mono"><U>Tests:</U></FONT>
+<FONT FACE="ubuntu mono">|</FONT>
+<FONT FACE="ubuntu mono">|&gt; </FONT><FONT COLOR="#00008b"><FONT FACE="ubuntu mono">dt_keys</FONT></FONT><FONT FACE="ubuntu mono"><B>( </B></FONT><FONT COLOR="#444444"><FONT FACE="ubuntu mono"><I>[\&quot;a\&quot;, 1, \&quot;b\&quot;, 2]</I></FONT></FONT> <FONT FACE="ubuntu mono"><B>)</B></FONT><FONT COLOR="#808080"><FONT FACE="ubuntu mono">= </FONT></FONT><FONT COLOR="#000080"><FONT FACE="ubuntu mono">[&quot;a&quot;, &quot;b&quot;]</FONT></FONT>
+<FONT FACE="ubuntu mono">|&gt; </FONT><FONT COLOR="#00008b"><FONT FACE="ubuntu mono">dt_keys</FONT></FONT><FONT FACE="ubuntu mono"><B>( </B></FONT><FONT COLOR="#444444"><FONT FACE="ubuntu mono"><I>[1, 2, 3, 4]</I></FONT></FONT> <FONT FACE="ubuntu mono"><B>)</B></FONT><FONT COLOR="#808080"><FONT FACE="ubuntu mono">= </FONT></FONT><FONT COLOR="#000080"><FONT FACE="ubuntu mono">[1, 3]</FONT></FONT>
+<FONT FACE="ubuntu mono">|&gt; </FONT><FONT COLOR="#00008b"><FONT FACE="ubuntu mono">dt_keys</FONT></FONT><FONT FACE="ubuntu mono"><B>( </B></FONT><FONT COLOR="#444444"><FONT FACE="ubuntu mono"><I>[1,2],0,3,4</I></FONT></FONT> <FONT FACE="ubuntu mono"><B>)</B></FONT><FONT COLOR="#808080"><FONT FACE="ubuntu mono">= </FONT></FONT><FONT COLOR="#000080"><FONT FACE="ubuntu mono">[[1, 2], 3]</FONT></FONT>
+<FONT FACE="ubuntu mono">|&gt; </FONT><FONT COLOR="#00008b"><FONT FACE="ubuntu mono">dt_keys</FONT></FONT><FONT FACE="ubuntu mono"><B>(  )</B></FONT><FONT COLOR="#808080"><FONT FACE="ubuntu mono">= </FONT></FONT><FONT COLOR="#000080"><FONT FACE="ubuntu mono">[]</FONT></FONT></PRE><P STYLE="margin-bottom: 0in">
+<BR>
+</P>
+<P STYLE="margin-bottom: 0in"><FONT FACE="Courier New, courier">-----------------------------------------------------------------</FONT><U><BR></U><U><B>dt</B></U><FONT FACE="DejaVu Sans"><SPAN LANG="zh-CN"><U><FONT FACE="DejaVu Sans"><FONT SIZE=2><SPAN LANG="zh-CN"><B>＿</B></SPAN></FONT></FONT></U></SPAN></FONT><U><B>multi</B></U><FONT COLOR="#008000"><U>
+( </U></FONT><FONT COLOR="#444444"><FONT FACE="ubuntu mono"><I><U>x,n=2</U></I></FONT></FONT><FONT COLOR="#008000"><U>
+)</U></FONT><FONT COLOR="#0000ff"><U>=</U></FONT><U>str|arr (
+tested:6 )</U></P>
+<PRE STYLE="margin-top: 0.05in; margin-bottom: 0.08in"><FONT FACE="ubuntu mono">| Given x and n, duplicate x (a str|int|arr) n times.</FONT>
+<FONT FACE="ubuntu mono">|</FONT>
+<FONT FACE="ubuntu mono">| </FONT><FONT FACE="ubuntu mono"><U>Tags:</U></FONT> <FONT FACE="ubuntu mono">Array,String</FONT>
+<FONT FACE="ubuntu mono">|</FONT>
+<FONT FACE="ubuntu mono">|</FONT><FONT FACE="ubuntu mono"><U>Tests:</U></FONT>
+<FONT FACE="ubuntu mono">|</FONT>
+<FONT FACE="ubuntu mono">|&gt; </FONT><FONT COLOR="#00008b"><FONT FACE="ubuntu mono">dt_multi</FONT></FONT><FONT FACE="ubuntu mono"><B>( </B></FONT><FONT COLOR="#444444"><FONT FACE="ubuntu mono"><I>&quot;d&quot;</I></FONT></FONT> <FONT FACE="ubuntu mono"><B>)</B></FONT><FONT COLOR="#808080"><FONT FACE="ubuntu mono">= </FONT></FONT><FONT COLOR="#800080"><FONT FACE="ubuntu mono">&quot;dd&quot;</FONT></FONT>
+<FONT FACE="ubuntu mono">|&gt; </FONT><FONT COLOR="#00008b"><FONT FACE="ubuntu mono">dt_multi</FONT></FONT><FONT FACE="ubuntu mono"><B>( </B></FONT><FONT COLOR="#444444"><FONT FACE="ubuntu mono"><I>&quot;d&quot;,5&quot;</I></FONT></FONT> <FONT FACE="ubuntu mono"><B>)</B></FONT><FONT COLOR="#808080"><FONT FACE="ubuntu mono">= </FONT></FONT><FONT COLOR="#800080"><FONT FACE="ubuntu mono">&quot;ddddd&quot;</FONT></FONT>
+<FONT FACE="ubuntu mono">|&gt; </FONT><FONT COLOR="#00008b"><FONT FACE="ubuntu mono">dt_multi</FONT></FONT><FONT FACE="ubuntu mono"><B>( </B></FONT><FONT COLOR="#444444"><FONT FACE="ubuntu mono"><I>[2,3]</I></FONT></FONT> <FONT FACE="ubuntu mono"><B>)</B></FONT><FONT COLOR="#808080"><FONT FACE="ubuntu mono">= </FONT></FONT><FONT COLOR="#000080"><FONT FACE="ubuntu mono">[2, 3, 2, 3]</FONT></FONT>
+<FONT FACE="ubuntu mono">|&gt; </FONT><FONT COLOR="#00008b"><FONT FACE="ubuntu mono">dt_multi</FONT></FONT><FONT FACE="ubuntu mono"><B>( </B></FONT><FONT COLOR="#444444"><FONT FACE="ubuntu mono"><I>[2,3],3</I></FONT></FONT> <FONT FACE="ubuntu mono"><B>)</B></FONT><FONT COLOR="#808080"><FONT FACE="ubuntu mono">= </FONT></FONT><FONT COLOR="#000080"><FONT FACE="ubuntu mono">[2, 3, 2, 3, 2, 3]</FONT></FONT>
+<FONT FACE="ubuntu mono">|&gt; </FONT><FONT COLOR="#00008b"><FONT FACE="ubuntu mono">dt_multi</FONT></FONT><FONT FACE="ubuntu mono"><B>( </B></FONT><FONT COLOR="#444444"><FONT FACE="ubuntu mono"><I>3</I></FONT></FONT> <FONT FACE="ubuntu mono"><B>)</B></FONT><FONT COLOR="#808080"><FONT FACE="ubuntu mono">= </FONT></FONT><FONT COLOR="#800080"><FONT FACE="ubuntu mono">&quot;33&quot;</FONT></FONT>
+<FONT FACE="ubuntu mono">|&gt; </FONT><FONT COLOR="#00008b"><FONT FACE="ubuntu mono">dt_multi</FONT></FONT><FONT FACE="ubuntu mono"><B>( </B></FONT><FONT COLOR="#444444"><FONT FACE="ubuntu mono"><I>3,5</I></FONT></FONT> <FONT FACE="ubuntu mono"><B>)</B></FONT><FONT COLOR="#808080"><FONT FACE="ubuntu mono">= </FONT></FONT><FONT COLOR="#800080"><FONT FACE="ubuntu mono">&quot;33333&quot;</FONT></FONT></PRE><P STYLE="margin-bottom: 0in">
+<BR>
+</P>
+<P STYLE="margin-bottom: 0in"><FONT FACE="Courier New, courier">-----------------------------------------------------------------</FONT><U><BR></U><U><B>dt</B></U><FONT FACE="DejaVu Sans"><SPAN LANG="zh-CN"><U><FONT FACE="DejaVu Sans"><FONT SIZE=2><SPAN LANG="zh-CN"><B>＿</B></SPAN></FONT></FONT></U></SPAN></FONT><U><B>replace</B></U><FONT COLOR="#008000"><U>
+( </U></FONT><FONT COLOR="#444444"><FONT FACE="ubuntu mono"><I><U>o,x,new=&quot;&quot;</U></I></FONT></FONT><FONT COLOR="#008000"><U>
+)</U></FONT><FONT COLOR="#0000ff"><U>=</U></FONT><U>str|arr (
+tested:13 )</U></P>
+<PRE STYLE="margin-top: 0.05in; margin-bottom: 0.08in"><FONT FACE="ubuntu mono">| Given a str|arr (o), x and optional new, replace x in o with</FONT>
+<FONT FACE="ubuntu mono">| new when o is a str; replace the item x (an index) with new</FONT>
+<FONT FACE="ubuntu mono">| when o is an array.</FONT>
+<FONT FACE="ubuntu mono">|</FONT>
+<FONT FACE="ubuntu mono">| </FONT><FONT FACE="ubuntu mono"><U>Tags:</U></FONT> <FONT FACE="ubuntu mono">String, Array</FONT>
+<FONT FACE="ubuntu mono">|</FONT>
+<FONT FACE="ubuntu mono">|</FONT><FONT FACE="ubuntu mono"><U>Tests:</U></FONT>
+<FONT FACE="ubuntu mono">|</FONT>
+<FONT FACE="ubuntu mono">|&gt; </FONT><FONT COLOR="#00008b"><FONT FACE="ubuntu mono">dt_replace</FONT></FONT><FONT FACE="ubuntu mono"><B>( </B></FONT><FONT COLOR="#444444"><FONT FACE="ubuntu mono"><I>&quot;a_text&quot;, &quot;e&quot;</I></FONT></FONT> <FONT FACE="ubuntu mono"><B>)</B></FONT><FONT COLOR="#808080"><FONT FACE="ubuntu mono">= </FONT></FONT><FONT COLOR="#800080"><FONT FACE="ubuntu mono">&quot;a_txt&quot;</FONT></FONT>
+<FONT FACE="ubuntu mono">|&gt; </FONT><FONT COLOR="#00008b"><FONT FACE="ubuntu mono">dt_replace</FONT></FONT><FONT FACE="ubuntu mono"><B>( </B></FONT><FONT COLOR="#444444"><FONT FACE="ubuntu mono"><I>&quot;a_text&quot;, &quot;&quot;</I></FONT></FONT> <FONT FACE="ubuntu mono"><B>)</B></FONT><FONT COLOR="#808080"><FONT FACE="ubuntu mono">= </FONT></FONT><FONT COLOR="#800080"><FONT FACE="ubuntu mono">&quot;a_text&quot;</FONT></FONT>
+<FONT FACE="ubuntu mono">|&gt; </FONT><FONT COLOR="#00008b"><FONT FACE="ubuntu mono">dt_replace</FONT></FONT><FONT FACE="ubuntu mono"><B>( </B></FONT><FONT COLOR="#444444"><FONT FACE="ubuntu mono"><I>&quot;a_text&quot;, &quot;a_t&quot;, &quot;A_T&quot;</I></FONT></FONT> <FONT FACE="ubuntu mono"><B>)</B></FONT><FONT COLOR="#808080"><FONT FACE="ubuntu mono">= </FONT></FONT><FONT COLOR="#800080"><FONT FACE="ubuntu mono">&quot;A_Text&quot;</FONT></FONT>
+<FONT FACE="ubuntu mono">|&gt; </FONT><FONT COLOR="#00008b"><FONT FACE="ubuntu mono">dt_replace</FONT></FONT><FONT FACE="ubuntu mono"><B>( </B></FONT><FONT COLOR="#444444"><FONT FACE="ubuntu mono"><I>&quot;a_text&quot;, &quot;ext&quot;, &quot;EXT&quot;</I></FONT></FONT> <FONT FACE="ubuntu mono"><B>)</B></FONT><FONT COLOR="#808080"><FONT FACE="ubuntu mono">= </FONT></FONT><FONT COLOR="#800080"><FONT FACE="ubuntu mono">&quot;a_tEXT&quot;</FONT></FONT>
+<FONT FACE="ubuntu mono">|&gt; </FONT><FONT COLOR="#00008b"><FONT FACE="ubuntu mono">dt_replace</FONT></FONT><FONT FACE="ubuntu mono"><B>( </B></FONT><FONT COLOR="#444444"><FONT FACE="ubuntu mono"><I>&quot;a_text&quot;, &quot;abc&quot;, &quot;EXT&quot;</I></FONT></FONT> <FONT FACE="ubuntu mono"><B>)</B></FONT><FONT COLOR="#808080"><FONT FACE="ubuntu mono">= </FONT></FONT><FONT COLOR="#800080"><FONT FACE="ubuntu mono">&quot;a_text&quot;</FONT></FONT>
+<FONT FACE="ubuntu mono">|&gt; </FONT><FONT COLOR="#00008b"><FONT FACE="ubuntu mono">dt_replace</FONT></FONT><FONT FACE="ubuntu mono"><B>( </B></FONT><FONT COLOR="#444444"><FONT FACE="ubuntu mono"><I>&quot;a_text&quot;, &quot;t&quot;,   &quot;{t}&quot;</I></FONT></FONT> <FONT FACE="ubuntu mono"><B>)</B></FONT><FONT COLOR="#808080"><FONT FACE="ubuntu mono">= </FONT></FONT><FONT COLOR="#800080"><FONT FACE="ubuntu mono">&quot;a_{t}ex{t}&quot;</FONT></FONT>
+<FONT FACE="ubuntu mono">|&gt; </FONT><FONT COLOR="#00008b"><FONT FACE="ubuntu mono">dt_replace</FONT></FONT><FONT FACE="ubuntu mono"><B>( </B></FONT><FONT COLOR="#444444"><FONT FACE="ubuntu mono"><I>&quot;a_text&quot;, &quot;t&quot;, 4</I></FONT></FONT> <FONT FACE="ubuntu mono"><B>)</B></FONT><FONT COLOR="#808080"><FONT FACE="ubuntu mono">= </FONT></FONT><FONT COLOR="#800080"><FONT FACE="ubuntu mono">&quot;a_4ex4&quot;</FONT></FONT>
+<FONT FACE="ubuntu mono">|&gt; </FONT><FONT COLOR="#00008b"><FONT FACE="ubuntu mono">dt_replace</FONT></FONT><FONT FACE="ubuntu mono"><B>( </B></FONT><FONT COLOR="#444444"><FONT FACE="ubuntu mono"><I>&quot;a_text&quot;, &quot;a_text&quot;, &quot;EXT&quot;</I></FONT></FONT> <FONT FACE="ubuntu mono"><B>)</B></FONT><FONT COLOR="#808080"><FONT FACE="ubuntu mono">= </FONT></FONT><FONT COLOR="#800080"><FONT FACE="ubuntu mono">&quot;EXT&quot;</FONT></FONT>
+<FONT FACE="ubuntu mono">|&gt; </FONT><FONT COLOR="#00008b"><FONT FACE="ubuntu mono">dt_replace</FONT></FONT><FONT FACE="ubuntu mono"><B>( </B></FONT><FONT COLOR="#444444"><FONT FACE="ubuntu mono"><I>&quot;&quot;, &quot;e&quot;</I></FONT></FONT> <FONT FACE="ubuntu mono"><B>)</B></FONT><FONT COLOR="#808080"><FONT FACE="ubuntu mono">= </FONT></FONT><FONT COLOR="#800080"><FONT FACE="ubuntu mono">&quot;&quot;</FONT></FONT>
+<FONT FACE="ubuntu mono">|# Array # </FONT>
+<FONT FACE="ubuntu mono">|&gt; </FONT><FONT COLOR="#00008b"><FONT FACE="ubuntu mono">dt_replace</FONT></FONT><FONT FACE="ubuntu mono"><B>( </B></FONT><FONT COLOR="#444444"><FONT FACE="ubuntu mono"><I>[2,3,5], 0, 4</I></FONT></FONT> <FONT FACE="ubuntu mono"><B>)</B></FONT><FONT COLOR="#808080"><FONT FACE="ubuntu mono">= </FONT></FONT><FONT COLOR="#000080"><FONT FACE="ubuntu mono">[4, 3, 5]</FONT></FONT>
+<FONT FACE="ubuntu mono">|&gt; </FONT><FONT COLOR="#00008b"><FONT FACE="ubuntu mono">dt_replace</FONT></FONT><FONT FACE="ubuntu mono"><B>( </B></FONT><FONT COLOR="#444444"><FONT FACE="ubuntu mono"><I>[2,3,5], 1, 4</I></FONT></FONT> <FONT FACE="ubuntu mono"><B>)</B></FONT><FONT COLOR="#808080"><FONT FACE="ubuntu mono">= </FONT></FONT><FONT COLOR="#000080"><FONT FACE="ubuntu mono">[2, 4, 5]</FONT></FONT>
+<FONT FACE="ubuntu mono">|&gt; </FONT><FONT COLOR="#00008b"><FONT FACE="ubuntu mono">dt_replace</FONT></FONT><FONT FACE="ubuntu mono"><B>( </B></FONT><FONT COLOR="#444444"><FONT FACE="ubuntu mono"><I>[2,3,5], 2, 4</I></FONT></FONT> <FONT FACE="ubuntu mono"><B>)</B></FONT><FONT COLOR="#808080"><FONT FACE="ubuntu mono">= </FONT></FONT><FONT COLOR="#000080"><FONT FACE="ubuntu mono">[2, 3, 4]</FONT></FONT>
+<FONT FACE="ubuntu mono">|&gt; </FONT><FONT COLOR="#00008b"><FONT FACE="ubuntu mono">dt_replace</FONT></FONT><FONT FACE="ubuntu mono"><B>( </B></FONT><FONT COLOR="#444444"><FONT FACE="ubuntu mono"><I>[2,3,5], 3, 4</I></FONT></FONT> <FONT FACE="ubuntu mono"><B>)</B></FONT><FONT COLOR="#808080"><FONT FACE="ubuntu mono">= </FONT></FONT><FONT COLOR="#000080"><FONT FACE="ubuntu mono">[2, 3, 5]</FONT></FONT></PRE><P STYLE="margin-bottom: 0in">
+<BR><FONT FACE="Courier New, courier">-----------------------------------------------------------------</FONT><U><BR></U><U><B>dt</B></U><FONT FACE="DejaVu Sans"><SPAN LANG="zh-CN"><U><FONT FACE="DejaVu Sans"><FONT SIZE=2><SPAN LANG="zh-CN"><B>＿</B></SPAN></FONT></FONT></U></SPAN></FONT><U><B>s</B></U><FONT COLOR="#008000"><U>
+( </U></FONT><FONT COLOR="#444444"><FONT FACE="ubuntu mono"><I><U>s,arr,sp=&quot;{_}&quot;</U></I></FONT></FONT><FONT COLOR="#008000"><U>
+)</U></FONT><FONT COLOR="#0000ff"><U>=</U></FONT><U>str ( tested:6 )</U></P>
+<PRE STYLE="margin-top: 0.05in; margin-bottom: 0.08in"><FONT FACE="ubuntu mono">| Given a string (s) and an array (arr), replace the sp in s with</FONT>
+<FONT FACE="ubuntu mono">| items of arr one by one. This serves as a string template.</FONT>
+<FONT FACE="ubuntu mono">|</FONT>
+<FONT FACE="ubuntu mono">| </FONT><FONT FACE="ubuntu mono"><U>Tags:</U></FONT> <FONT FACE="ubuntu mono">String</FONT>
+<FONT FACE="ubuntu mono">|</FONT>
+<FONT FACE="ubuntu mono">|</FONT><FONT FACE="ubuntu mono"><U>Tests:</U></FONT>
+<FONT FACE="ubuntu mono">|</FONT>
+<FONT FACE="ubuntu mono">|&gt; </FONT><FONT COLOR="#00008b"><FONT FACE="ubuntu mono">dt_s</FONT></FONT><FONT FACE="ubuntu mono"><B>( </B></FONT><FONT COLOR="#444444"><FONT FACE="ubuntu mono"><I>&quot;2014.{_}.{_}&quot;, [3,6]</I></FONT></FONT> <FONT FACE="ubuntu mono"><B>)</B></FONT><FONT COLOR="#808080"><FONT FACE="ubuntu mono">= </FONT></FONT><FONT COLOR="#800080"><FONT FACE="ubuntu mono">&quot;2014.3.6&quot;</FONT></FONT>
+<FONT FACE="ubuntu mono">|&gt; </FONT><FONT COLOR="#00008b"><FONT FACE="ubuntu mono">dt_s</FONT></FONT><FONT FACE="ubuntu mono"><B>( </B></FONT><FONT COLOR="#444444"><FONT FACE="ubuntu mono"><I>&quot;&quot;, [3,6]</I></FONT></FONT> <FONT FACE="ubuntu mono"><B>)</B></FONT><FONT COLOR="#808080"><FONT FACE="ubuntu mono">= </FONT></FONT><FONT COLOR="#800080"><FONT FACE="ubuntu mono">&quot;&quot;</FONT></FONT>
+<FONT FACE="ubuntu mono">|&gt; </FONT><FONT COLOR="#00008b"><FONT FACE="ubuntu mono">dt_s</FONT></FONT><FONT FACE="ubuntu mono"><B>( </B></FONT><FONT COLOR="#444444"><FONT FACE="ubuntu mono"><I>&quot;2014.{_}.{_}&quot;, []</I></FONT></FONT> <FONT FACE="ubuntu mono"><B>)</B></FONT><FONT COLOR="#808080"><FONT FACE="ubuntu mono">= </FONT></FONT><FONT COLOR="#800080"><FONT FACE="ubuntu mono">&quot;2014.{_}.{_}&quot;</FONT></FONT>
+<FONT FACE="ubuntu mono">|&gt; </FONT><FONT COLOR="#00008b"><FONT FACE="ubuntu mono">dt_s</FONT></FONT><FONT FACE="ubuntu mono"><B>( </B></FONT><FONT COLOR="#444444"><FONT FACE="ubuntu mono"><I>&quot;2014.{_}.{_}&quot;, [3]</I></FONT></FONT> <FONT FACE="ubuntu mono"><B>)</B></FONT><FONT COLOR="#808080"><FONT FACE="ubuntu mono">= </FONT></FONT><FONT COLOR="#800080"><FONT FACE="ubuntu mono">&quot;2014.3.{_}&quot;</FONT></FONT>
+<FONT FACE="ubuntu mono">|&gt; </FONT><FONT COLOR="#00008b"><FONT FACE="ubuntu mono">dt_s</FONT></FONT><FONT FACE="ubuntu mono"><B>( </B></FONT><FONT COLOR="#444444"><FONT FACE="ubuntu mono"><I>&quot;2014.3.6&quot;, [4,5]</I></FONT></FONT> <FONT FACE="ubuntu mono"><B>)</B></FONT><FONT COLOR="#808080"><FONT FACE="ubuntu mono">= </FONT></FONT><FONT COLOR="#800080"><FONT FACE="ubuntu mono">&quot;2014.3.6&quot;</FONT></FONT>
+<FONT FACE="ubuntu mono">|&gt; </FONT><FONT COLOR="#00008b"><FONT FACE="ubuntu mono">dt_s</FONT></FONT><FONT FACE="ubuntu mono"><B>( </B></FONT><FONT COLOR="#444444"><FONT FACE="ubuntu mono"><I>&quot;{_} car {_} seats?&quot;, [&quot;red&quot;,&quot;blue&quot;]</I></FONT></FONT> <FONT FACE="ubuntu mono"><B>)</B></FONT><FONT COLOR="#808080"><FONT FACE="ubuntu mono">= </FONT></FONT><FONT COLOR="#800080"><FONT FACE="ubuntu mono">&quot;redcarblueseats?&quot;</FONT></FONT></PRE><P STYLE="margin-bottom: 0in">
+<BR>
+</P>
+<P STYLE="margin-bottom: 0in"><FONT FACE="Courier New, courier">-----------------------------------------------------------------</FONT><U><BR></U><U><B>dt</B></U><FONT FACE="DejaVu Sans"><SPAN LANG="zh-CN"><U><FONT FACE="DejaVu Sans"><FONT SIZE=2><SPAN LANG="zh-CN"><B>＿</B></SPAN></FONT></FONT></U></SPAN></FONT><U><B>slice</B></U><FONT COLOR="#008000"><U>
+( </U></FONT><FONT COLOR="#444444"><FONT FACE="ubuntu mono"><I><U>s,i,j=&quot;&quot;</U></I></FONT></FONT><FONT COLOR="#008000"><U>
+)</U></FONT><FONT COLOR="#0000ff"><U>=</U></FONT><U>str|arr (
+tested:19 )</U></P>
+<PRE STYLE="margin-top: 0.05in; margin-bottom: 0.08in"><FONT FACE="ubuntu mono">| Slice s (str|arr) from i to j.</FONT>
+<FONT FACE="ubuntu mono">|</FONT>
+<FONT FACE="ubuntu mono">| </FONT><FONT FACE="ubuntu mono"><U>Tags:</U></FONT> <FONT FACE="ubuntu mono">String,Array</FONT>
+<FONT FACE="ubuntu mono">|</FONT>
+<FONT FACE="ubuntu mono">|</FONT><FONT FACE="ubuntu mono"><U>Tests:</U></FONT>
+<FONT FACE="ubuntu mono">|</FONT>
+<FONT FACE="ubuntu mono">|## dt_slice a string ##</FONT>
+<FONT FACE="ubuntu mono">|&gt; </FONT><FONT COLOR="#00008b"><FONT FACE="ubuntu mono">dt_slice</FONT></FONT><FONT FACE="ubuntu mono"><B>( </B></FONT><FONT COLOR="#444444"><FONT FACE="ubuntu mono"><I>&quot;I_am_the_dt_slice&quot;, -6</I></FONT></FONT> <FONT FACE="ubuntu mono"><B>)</B></FONT><FONT COLOR="#808080"><FONT FACE="ubuntu mono">= </FONT></FONT><FONT COLOR="#800080"><FONT FACE="ubuntu mono">&quot;_slice&quot;</FONT></FONT>
+<FONT FACE="ubuntu mono">|&gt; </FONT><FONT COLOR="#00008b"><FONT FACE="ubuntu mono">dt_slice</FONT></FONT><FONT FACE="ubuntu mono"><B>( </B></FONT><FONT COLOR="#444444"><FONT FACE="ubuntu mono"><I>&quot;I_am_the_dt_slice&quot;, 0</I></FONT></FONT> <FONT FACE="ubuntu mono"><B>)</B></FONT><FONT COLOR="#808080"><FONT FACE="ubuntu mono">= </FONT></FONT><FONT COLOR="#800080"><FONT FACE="ubuntu mono">&quot;I_am_the_slice&quot;</FONT></FONT>
+<FONT FACE="ubuntu mono">|&gt; </FONT><FONT COLOR="#00008b"><FONT FACE="ubuntu mono">dt_slice</FONT></FONT><FONT FACE="ubuntu mono"><B>( </B></FONT><FONT COLOR="#444444"><FONT FACE="ubuntu mono"><I>&quot;I_am_the_slice&quot;, 0,5</I></FONT></FONT> <FONT FACE="ubuntu mono"><B>)</B></FONT><FONT COLOR="#808080"><FONT FACE="ubuntu mono">= </FONT></FONT><FONT COLOR="#800080"><FONT FACE="ubuntu mono">&quot;I_am_&quot;</FONT></FONT>
+<FONT FACE="ubuntu mono">|&gt; </FONT><FONT COLOR="#00008b"><FONT FACE="ubuntu mono">dt_slice</FONT></FONT><FONT FACE="ubuntu mono"><B>( </B></FONT><FONT COLOR="#444444"><FONT FACE="ubuntu mono"><I>&quot;I_am_the_slice&quot;, 2</I></FONT></FONT> <FONT FACE="ubuntu mono"><B>)</B></FONT><FONT COLOR="#808080"><FONT FACE="ubuntu mono">= </FONT></FONT><FONT COLOR="#800080"><FONT FACE="ubuntu mono">&quot;am_the_slice&quot;</FONT></FONT>
+<FONT FACE="ubuntu mono">|&gt; </FONT><FONT COLOR="#00008b"><FONT FACE="ubuntu mono">dt_slice</FONT></FONT><FONT FACE="ubuntu mono"><B>( </B></FONT><FONT COLOR="#444444"><FONT FACE="ubuntu mono"><I>&quot;I_am_the_slice&quot;, 2,5</I></FONT></FONT> <FONT FACE="ubuntu mono"><B>)</B></FONT><FONT COLOR="#808080"><FONT FACE="ubuntu mono">= </FONT></FONT><FONT COLOR="#800080"><FONT FACE="ubuntu mono">&quot;am_&quot;</FONT></FONT>
+<FONT FACE="ubuntu mono">|&gt; </FONT><FONT COLOR="#00008b"><FONT FACE="ubuntu mono">dt_slice</FONT></FONT><FONT FACE="ubuntu mono"><B>( </B></FONT><FONT COLOR="#444444"><FONT FACE="ubuntu mono"><I>&quot;I_am_the_slice&quot;, -9,-6</I></FONT></FONT> <FONT FACE="ubuntu mono"><B>)</B></FONT><FONT COLOR="#808080"><FONT FACE="ubuntu mono">= </FONT></FONT><FONT COLOR="#800080"><FONT FACE="ubuntu mono">&quot;the&quot;</FONT></FONT>
+<FONT FACE="ubuntu mono">|&gt; </FONT><FONT COLOR="#00008b"><FONT FACE="ubuntu mono">dt_slice</FONT></FONT><FONT FACE="ubuntu mono"><B>( </B></FONT><FONT COLOR="#444444"><FONT FACE="ubuntu mono"><I>&quot;I_am_the_slice&quot;, -2</I></FONT></FONT> <FONT FACE="ubuntu mono"><B>)</B></FONT><FONT COLOR="#808080"><FONT FACE="ubuntu mono">= </FONT></FONT><FONT COLOR="#800080"><FONT FACE="ubuntu mono">&quot;ce&quot;</FONT></FONT>
+<FONT FACE="ubuntu mono">|&gt; </FONT><FONT COLOR="#00008b"><FONT FACE="ubuntu mono">dt_slice</FONT></FONT><FONT FACE="ubuntu mono"><B>( </B></FONT><FONT COLOR="#444444"><FONT FACE="ubuntu mono"><I>&quot;I_am_the_slice&quot;, 1,1</I></FONT></FONT> <FONT FACE="ubuntu mono"><B>)</B></FONT><FONT COLOR="#808080"><FONT FACE="ubuntu mono">= </FONT></FONT><FONT COLOR="#800080"><FONT FACE="ubuntu mono">&quot;&quot;</FONT></FONT>
+<FONT FACE="ubuntu mono">|&gt; </FONT><FONT COLOR="#00008b"><FONT FACE="ubuntu mono">dt_slice</FONT></FONT><FONT FACE="ubuntu mono"><B>( </B></FONT><FONT COLOR="#444444"><FONT FACE="ubuntu mono"><I>&quot;&quot;, -2</I></FONT></FONT> <FONT FACE="ubuntu mono"><B>)</B></FONT><FONT COLOR="#808080"><FONT FACE="ubuntu mono">= </FONT></FONT><FONT COLOR="#a52a2a"><FONT FACE="ubuntu mono">undef</FONT></FONT>
+<FONT FACE="ubuntu mono">|## slice an array ##</FONT>
+<FONT FACE="ubuntu mono">|&gt; </FONT><FONT COLOR="#00008b"><FONT FACE="ubuntu mono">dt_slice</FONT></FONT><FONT FACE="ubuntu mono"><B>( </B></FONT><FONT COLOR="#444444"><FONT FACE="ubuntu mono"><I>[3,4,5,6,7,8,9], 2</I></FONT></FONT> <FONT FACE="ubuntu mono"><B>)</B></FONT><FONT COLOR="#808080"><FONT FACE="ubuntu mono">= </FONT></FONT><FONT COLOR="#000080"><FONT FACE="ubuntu mono">[5, 6, 7, 8, 9]</FONT></FONT>
+<FONT FACE="ubuntu mono">|&gt; </FONT><FONT COLOR="#00008b"><FONT FACE="ubuntu mono">dt_slice</FONT></FONT><FONT FACE="ubuntu mono"><B>( </B></FONT><FONT COLOR="#444444"><FONT FACE="ubuntu mono"><I>[3,4,5,6,7,8,9], 2,5</I></FONT></FONT> <FONT FACE="ubuntu mono"><B>)</B></FONT><FONT COLOR="#808080"><FONT FACE="ubuntu mono">= </FONT></FONT><FONT COLOR="#000080"><FONT FACE="ubuntu mono">[5, 6, 7]</FONT></FONT>
+<FONT FACE="ubuntu mono">|&gt; </FONT><FONT COLOR="#00008b"><FONT FACE="ubuntu mono">dt_slice</FONT></FONT><FONT FACE="ubuntu mono"><B>( </B></FONT><FONT COLOR="#444444"><FONT FACE="ubuntu mono"><I>[3,4,5,6,7,8,9], -3</I></FONT></FONT> <FONT FACE="ubuntu mono"><B>)</B></FONT><FONT COLOR="#808080"><FONT FACE="ubuntu mono">= </FONT></FONT><FONT COLOR="#000080"><FONT FACE="ubuntu mono">[7, 8, 9]</FONT></FONT>
+<FONT FACE="ubuntu mono">|&gt; </FONT><FONT COLOR="#00008b"><FONT FACE="ubuntu mono">dt_slice</FONT></FONT><FONT FACE="ubuntu mono"><B>( </B></FONT><FONT COLOR="#444444"><FONT FACE="ubuntu mono"><I>[[1,2],[3,4],[5,6]], 2</I></FONT></FONT> <FONT FACE="ubuntu mono"><B>)</B></FONT><FONT COLOR="#808080"><FONT FACE="ubuntu mono">= </FONT></FONT><FONT COLOR="#000080"><FONT FACE="ubuntu mono">[[5, 6]]</FONT></FONT>
+<FONT FACE="ubuntu mono">|&gt; </FONT><FONT COLOR="#00008b"><FONT FACE="ubuntu mono">dt_slice</FONT></FONT><FONT FACE="ubuntu mono"><B>( </B></FONT><FONT COLOR="#444444"><FONT FACE="ubuntu mono"><I>[[1,2],[3,4],[5,6]], 1,1</I></FONT></FONT> <FONT FACE="ubuntu mono"><B>)</B></FONT><FONT COLOR="#808080"><FONT FACE="ubuntu mono">= </FONT></FONT><FONT COLOR="#000080"><FONT FACE="ubuntu mono">[]</FONT></FONT>
+<FONT FACE="ubuntu mono">|&gt; </FONT><FONT COLOR="#00008b"><FONT FACE="ubuntu mono">dt_slice</FONT></FONT><FONT FACE="ubuntu mono"><B>( </B></FONT><FONT COLOR="#444444"><FONT FACE="ubuntu mono"><I>[], 1</I></FONT></FONT> <FONT FACE="ubuntu mono"><B>)</B></FONT><FONT COLOR="#808080"><FONT FACE="ubuntu mono">= </FONT></FONT><FONT COLOR="#a52a2a"><FONT FACE="ubuntu mono">undef</FONT></FONT>
+<FONT FACE="ubuntu mono">|&gt; </FONT><FONT COLOR="#00008b"><FONT FACE="ubuntu mono">dt_slice</FONT></FONT><FONT FACE="ubuntu mono"><B>( </B></FONT><FONT COLOR="#444444"><FONT FACE="ubuntu mono"><I>[9], 1</I></FONT></FONT> <FONT FACE="ubuntu mono"><B>)</B></FONT><FONT COLOR="#808080"><FONT FACE="ubuntu mono">= </FONT></FONT><FONT COLOR="#a52a2a"><FONT FACE="ubuntu mono">undef</FONT></FONT>
+<FONT FACE="ubuntu mono">|</FONT><FONT COLOR="#008b8b"><FONT FACE="ubuntu mono">// --- when j&gt;0 &amp;&amp; i&gt;j || i</FONT></FONT>
+<FONT COLOR="#008b8b"><FONT FACE="ubuntu mono">|&gt; </FONT></FONT><FONT COLOR="#00008b"><FONT FACE="ubuntu mono">dt_slice</FONT></FONT><FONT COLOR="#008b8b"><FONT FACE="ubuntu mono"><B>( </B></FONT></FONT><FONT COLOR="#444444"><FONT FACE="ubuntu mono"><I>&quot;I_am_the_slice&quot;, 5,2</I></FONT></FONT><FONT COLOR="#008b8b"> </FONT><FONT COLOR="#008b8b"><FONT FACE="ubuntu mono"><B>)</B></FONT></FONT><FONT COLOR="#808080"><FONT FACE="ubuntu mono">= </FONT></FONT><FONT COLOR="#a52a2a"><FONT FACE="ubuntu mono">undef</FONT></FONT>
+<FONT COLOR="#008b8b"><FONT FACE="ubuntu mono">|&gt; </FONT></FONT><FONT COLOR="#00008b"><FONT FACE="ubuntu mono">dt_slice</FONT></FONT><FONT COLOR="#008b8b"><FONT FACE="ubuntu mono"><B>( </B></FONT></FONT><FONT COLOR="#444444"><FONT FACE="ubuntu mono"><I>&quot;I_am_the_slice&quot;, 2,1</I></FONT></FONT><FONT COLOR="#008b8b"> </FONT><FONT COLOR="#008b8b"><FONT FACE="ubuntu mono"><B>)</B></FONT></FONT><FONT COLOR="#808080"><FONT FACE="ubuntu mono">= </FONT></FONT><FONT COLOR="#a52a2a"><FONT FACE="ubuntu mono">undef</FONT></FONT>
+<FONT COLOR="#008b8b"><FONT FACE="ubuntu mono">|&gt; </FONT></FONT><FONT COLOR="#00008b"><FONT FACE="ubuntu mono">dt_slice</FONT></FONT><FONT COLOR="#008b8b"><FONT FACE="ubuntu mono"><B>( </B></FONT></FONT><FONT COLOR="#444444"><FONT FACE="ubuntu mono"><I>&quot;I_am_the_slice&quot;, -3,-5</I></FONT></FONT><FONT COLOR="#008b8b"> </FONT><FONT COLOR="#008b8b"><FONT FACE="ubuntu mono"><B>)</B></FONT></FONT><FONT COLOR="#808080"><FONT FACE="ubuntu mono">= </FONT></FONT><FONT COLOR="#a52a2a"><FONT FACE="ubuntu mono">undef</FONT></FONT></PRE><P STYLE="margin-bottom: 0in">
+<BR><FONT FACE="Courier New, courier">-----------------------------------------------------------------</FONT><U><BR></U><U><B>dt</B></U><FONT FACE="DejaVu Sans"><SPAN LANG="zh-CN"><U><FONT FACE="DejaVu Sans"><FONT SIZE=2><SPAN LANG="zh-CN"><B>＿</B></SPAN></FONT></FONT></U></SPAN></FONT><U><B>split</B></U><FONT COLOR="#008000"><U>
+( </U></FONT><FONT COLOR="#444444"><FONT FACE="ubuntu mono"><I><U>s,
+sp=&quot;,&quot;</U></I></FONT></FONT><FONT COLOR="#008000"><U> )</U></FONT><FONT COLOR="#0000ff"><U>=</U></FONT><U>arr
+( tested:6 )</U></P>
+<PRE STYLE="margin-top: 0.05in; margin-bottom: 0.08in"><FONT FACE="ubuntu mono">| Split a string into an array.</FONT>
+<FONT FACE="ubuntu mono">|</FONT>
+<FONT FACE="ubuntu mono">| </FONT><FONT FACE="ubuntu mono"><U>Tags:</U></FONT> <FONT FACE="ubuntu mono">String</FONT>
+<FONT FACE="ubuntu mono">|</FONT>
+<FONT FACE="ubuntu mono">|</FONT><FONT FACE="ubuntu mono"><U>Tests:</U></FONT>
+<FONT FACE="ubuntu mono">|</FONT>
+<FONT FACE="ubuntu mono">|&gt; </FONT><FONT COLOR="#00008b"><FONT FACE="ubuntu mono">dt_split</FONT></FONT><FONT FACE="ubuntu mono"><B>( </B></FONT><FONT COLOR="#444444"><FONT FACE="ubuntu mono"><I>&quot;this is it&quot;</I></FONT></FONT> <FONT FACE="ubuntu mono"><B>)</B></FONT><FONT COLOR="#808080"><FONT FACE="ubuntu mono">= </FONT></FONT><FONT COLOR="#000080"><FONT FACE="ubuntu mono">[&quot;this&quot;, &quot;is&quot;, &quot;it&quot;]</FONT></FONT>
+<FONT FACE="ubuntu mono">|&gt; </FONT><FONT COLOR="#00008b"><FONT FACE="ubuntu mono">dt_split</FONT></FONT><FONT FACE="ubuntu mono"><B>( </B></FONT><FONT COLOR="#444444"><FONT FACE="ubuntu mono"><I>&quot;this is it&quot;,&quot;i&quot;</I></FONT></FONT> <FONT FACE="ubuntu mono"><B>)</B></FONT><FONT COLOR="#808080"><FONT FACE="ubuntu mono">= </FONT></FONT><FONT COLOR="#000080"><FONT FACE="ubuntu mono">[&quot;th&quot;, &quot;s &quot;, &quot;s &quot;, &quot;t&quot;]</FONT></FONT>
+<FONT FACE="ubuntu mono">|&gt; </FONT><FONT COLOR="#00008b"><FONT FACE="ubuntu mono">dt_split</FONT></FONT><FONT FACE="ubuntu mono"><B>( </B></FONT><FONT COLOR="#444444"><FONT FACE="ubuntu mono"><I>&quot;this is it&quot;,&quot;t&quot;</I></FONT></FONT> <FONT FACE="ubuntu mono"><B>)</B></FONT><FONT COLOR="#808080"><FONT FACE="ubuntu mono">= </FONT></FONT><FONT COLOR="#000080"><FONT FACE="ubuntu mono">[&quot;&quot;, &quot;his is i&quot;, &quot;&quot;]</FONT></FONT>
+<FONT FACE="ubuntu mono">|&gt; </FONT><FONT COLOR="#00008b"><FONT FACE="ubuntu mono">dt_split</FONT></FONT><FONT FACE="ubuntu mono"><B>( </B></FONT><FONT COLOR="#444444"><FONT FACE="ubuntu mono"><I>&quot;this is it&quot;,&quot;is&quot;</I></FONT></FONT> <FONT FACE="ubuntu mono"><B>)</B></FONT><FONT COLOR="#808080"><FONT FACE="ubuntu mono">= </FONT></FONT><FONT COLOR="#000080"><FONT FACE="ubuntu mono">[&quot;th&quot;, &quot; &quot;, &quot; it&quot;]</FONT></FONT>
+<FONT FACE="ubuntu mono">|&gt; </FONT><FONT COLOR="#00008b"><FONT FACE="ubuntu mono">dt_split</FONT></FONT><FONT FACE="ubuntu mono"><B>( </B></FONT><FONT COLOR="#444444"><FONT FACE="ubuntu mono"><I>&quot;this is it&quot;,&quot;,&quot;</I></FONT></FONT> <FONT FACE="ubuntu mono"><B>)</B></FONT><FONT COLOR="#808080"><FONT FACE="ubuntu mono">= </FONT></FONT><FONT COLOR="#000080"><FONT FACE="ubuntu mono">[&quot;this is it&quot;]</FONT></FONT>
+<FONT FACE="ubuntu mono">|&gt; </FONT><FONT COLOR="#00008b"><FONT FACE="ubuntu mono">dt_split</FONT></FONT><FONT FACE="ubuntu mono"><B>( </B></FONT><FONT COLOR="#444444"><FONT FACE="ubuntu mono"><I>&quot;Scadex&quot;,&quot;Scadex&quot;</I></FONT></FONT> <FONT FACE="ubuntu mono"><B>)</B></FONT><FONT COLOR="#808080"><FONT FACE="ubuntu mono">= </FONT></FONT><FONT COLOR="#000080"><FONT FACE="ubuntu mono">[&quot;&quot;, &quot;&quot;]</FONT></FONT></PRE><P STYLE="margin-bottom: 0in">
+<BR>
+</P>
+<P STYLE="margin-bottom: 0in"><FONT FACE="Courier New, courier">-----------------------------------------------------------------</FONT><U><BR></U><U><B>dt</B></U><FONT FACE="DejaVu Sans"><SPAN LANG="zh-CN"><U><FONT FACE="DejaVu Sans"><FONT SIZE=2><SPAN LANG="zh-CN"><B>＿</B></SPAN></FONT></FONT></U></SPAN></FONT><U><B>type</B></U><FONT COLOR="#008000"><U>
+( </U></FONT><FONT COLOR="#444444"><FONT FACE="ubuntu mono"><I><U>x</U></I></FONT></FONT><FONT COLOR="#008000"><U>
+)</U></FONT><FONT COLOR="#0000ff"><U>=</U></FONT><U>str ( tested:11 )</U></P>
+<PRE STYLE="margin-top: 0.05in; margin-bottom: 0.08in"><FONT FACE="ubuntu mono">| Given x, return type of x as a string.</FONT>
+<FONT FACE="ubuntu mono">|</FONT>
+<FONT FACE="ubuntu mono">| </FONT><FONT FACE="ubuntu mono"><U>Tags:</U></FONT> <FONT FACE="ubuntu mono">dt_type, Inspect</FONT>
+<FONT FACE="ubuntu mono">|</FONT>
+<FONT FACE="ubuntu mono">|</FONT><FONT FACE="ubuntu mono"><U>Tests:</U></FONT>
+<FONT FACE="ubuntu mono">|</FONT>
+<FONT FACE="ubuntu mono">|&gt; </FONT><FONT COLOR="#00008b"><FONT FACE="ubuntu mono">dt_type</FONT></FONT><FONT FACE="ubuntu mono"><B>( </B></FONT><FONT COLOR="#444444"><FONT FACE="ubuntu mono"><I>[2,3]</I></FONT></FONT> <FONT FACE="ubuntu mono"><B>)</B></FONT><FONT COLOR="#808080"><FONT FACE="ubuntu mono">= </FONT></FONT><FONT COLOR="#800080"><FONT FACE="ubuntu mono">&quot;arr&quot;</FONT></FONT>
+<FONT FACE="ubuntu mono">|&gt; </FONT><FONT COLOR="#00008b"><FONT FACE="ubuntu mono">dt_type</FONT></FONT><FONT FACE="ubuntu mono"><B>( </B></FONT><FONT COLOR="#444444"><FONT FACE="ubuntu mono"><I>[]</I></FONT></FONT> <FONT FACE="ubuntu mono"><B>)</B></FONT><FONT COLOR="#808080"><FONT FACE="ubuntu mono">= </FONT></FONT><FONT COLOR="#800080"><FONT FACE="ubuntu mono">&quot;arr&quot;</FONT></FONT>
+<FONT FACE="ubuntu mono">|&gt; </FONT><FONT COLOR="#00008b"><FONT FACE="ubuntu mono">dt_type</FONT></FONT><FONT FACE="ubuntu mono"><B>( </B></FONT><FONT COLOR="#444444"><FONT FACE="ubuntu mono"><I>-4</I></FONT></FONT> <FONT FACE="ubuntu mono"><B>)</B></FONT><FONT COLOR="#808080"><FONT FACE="ubuntu mono">= </FONT></FONT><FONT COLOR="#800080"><FONT FACE="ubuntu mono">&quot;int&quot;</FONT></FONT>
+<FONT FACE="ubuntu mono">|&gt; </FONT><FONT COLOR="#00008b"><FONT FACE="ubuntu mono">dt_type</FONT></FONT><FONT FACE="ubuntu mono"><B>( </B></FONT><FONT COLOR="#444444"><FONT FACE="ubuntu mono"><I>0</I></FONT></FONT> <FONT FACE="ubuntu mono"><B>)</B></FONT><FONT COLOR="#808080"><FONT FACE="ubuntu mono">= </FONT></FONT><FONT COLOR="#800080"><FONT FACE="ubuntu mono">&quot;int&quot;</FONT></FONT>
+<FONT FACE="ubuntu mono">|&gt; </FONT><FONT COLOR="#00008b"><FONT FACE="ubuntu mono">dt_type</FONT></FONT><FONT FACE="ubuntu mono"><B>( </B></FONT><FONT COLOR="#444444"><FONT FACE="ubuntu mono"><I>0.3</I></FONT></FONT> <FONT FACE="ubuntu mono"><B>)</B></FONT><FONT COLOR="#808080"><FONT FACE="ubuntu mono">= </FONT></FONT><FONT COLOR="#800080"><FONT FACE="ubuntu mono">&quot;float&quot;</FONT></FONT>
+<FONT FACE="ubuntu mono">|&gt; </FONT><FONT COLOR="#00008b"><FONT FACE="ubuntu mono">dt_type</FONT></FONT><FONT FACE="ubuntu mono"><B>( </B></FONT><FONT COLOR="#444444"><FONT FACE="ubuntu mono"><I>-0.3</I></FONT></FONT> <FONT FACE="ubuntu mono"><B>)</B></FONT><FONT COLOR="#808080"><FONT FACE="ubuntu mono">= </FONT></FONT><FONT COLOR="#800080"><FONT FACE="ubuntu mono">&quot;float&quot;</FONT></FONT>
+<FONT FACE="ubuntu mono">|&gt; </FONT><FONT COLOR="#00008b"><FONT FACE="ubuntu mono">dt_type</FONT></FONT><FONT FACE="ubuntu mono"><B>( </B></FONT><FONT COLOR="#444444"><FONT FACE="ubuntu mono"><I>&quot;a&quot;</I></FONT></FONT> <FONT FACE="ubuntu mono"><B>)</B></FONT><FONT COLOR="#808080"><FONT FACE="ubuntu mono">= </FONT></FONT><FONT COLOR="#800080"><FONT FACE="ubuntu mono">&quot;str&quot;</FONT></FONT>
+<FONT FACE="ubuntu mono">|&gt; </FONT><FONT COLOR="#00008b"><FONT FACE="ubuntu mono">dt_type</FONT></FONT><FONT FACE="ubuntu mono"><B>( </B></FONT><FONT COLOR="#444444"><FONT FACE="ubuntu mono"><I>&quot;10&quot;</I></FONT></FONT> <FONT FACE="ubuntu mono"><B>)</B></FONT><FONT COLOR="#808080"><FONT FACE="ubuntu mono">= </FONT></FONT><FONT COLOR="#800080"><FONT FACE="ubuntu mono">&quot;str&quot;</FONT></FONT>
+<FONT FACE="ubuntu mono">|&gt; </FONT><FONT COLOR="#00008b"><FONT FACE="ubuntu mono">dt_type</FONT></FONT><FONT FACE="ubuntu mono"><B>( </B></FONT><FONT COLOR="#444444"><FONT FACE="ubuntu mono"><I>true</I></FONT></FONT> <FONT FACE="ubuntu mono"><B>)</B></FONT><FONT COLOR="#808080"><FONT FACE="ubuntu mono">= </FONT></FONT><FONT COLOR="#800080"><FONT FACE="ubuntu mono">&quot;bool&quot;</FONT></FONT>
+<FONT FACE="ubuntu mono">|&gt; </FONT><FONT COLOR="#00008b"><FONT FACE="ubuntu mono">dt_type</FONT></FONT><FONT FACE="ubuntu mono"><B>( </B></FONT><FONT COLOR="#444444"><FONT FACE="ubuntu mono"><I>false</I></FONT></FONT> <FONT FACE="ubuntu mono"><B>)</B></FONT><FONT COLOR="#808080"><FONT FACE="ubuntu mono">= </FONT></FONT><FONT COLOR="#800080"><FONT FACE="ubuntu mono">&quot;bool&quot;</FONT></FONT>
+<FONT FACE="ubuntu mono">|&gt; </FONT><FONT COLOR="#00008b"><FONT FACE="ubuntu mono">dt_type</FONT></FONT><FONT FACE="ubuntu mono"><B>( </B></FONT><FONT COLOR="#444444"><FONT FACE="ubuntu mono"><I>undef</I></FONT></FONT> <FONT FACE="ubuntu mono"><B>)</B></FONT><FONT COLOR="#808080"><FONT FACE="ubuntu mono">= </FONT></FONT><FONT COLOR="#a52a2a"><FONT FACE="ubuntu mono">undef</FONT></FONT></PRE><P STYLE="margin-bottom: 0in">
+<BR>
+</P>
+<P STYLE="margin-bottom: 0in; page-break-before: always"><FONT COLOR="#a52a2a"><FONT FACE="Courier New, courier">-----------------------------------------------------------------</FONT></FONT><FONT COLOR="#a52a2a"><FONT FACE="Courier New, courier"><U><BR></U></FONT></FONT><FONT COLOR="#a52a2a"><FONT FACE="Courier New, courier">||.........
+</FONT></FONT><FONT COLOR="#a52a2a"><FONT FACE="Courier New, courier"><B>OpenSCAD_DocTest
+version: 20140720_1</B></FONT></FONT><FONT COLOR="#a52a2a">
+</FONT><FONT COLOR="#a52a2a"><FONT FACE="Courier New, courier">.........||</FONT></FONT></P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+<P STYLE="margin-bottom: 0in"><BR>
+</P>
+</BODY>
+</HTML>
