@@ -21,22 +21,23 @@ Copyright (C) 2014 Runsun Pan (run+sun (at) gmail.com)
 ####1. Introduction
 
 **OpenSCAD_DocTest** is a library for *doc* and *unit testing* of functions in [**OpenSCAD**](http://www.openscad.org). 
-Both doc and tests are written in arrays and processed by **doctest()** and output to the 
+Both doc and tests are written in arrays and processed by `doctest()` and output to the 
 console. It has different modes like doc only, test only, show tests as examples (i.e., 
 no testing), etc, and capable of commenting on test cases easily, making it a good tool 
-for demostrating *function usages*. 
+for demostrating **demo of usages**. Check out [*openscad_doctest_modes.md*](https://github.com/runsun/openscad_doctest/blob/master/openscad_doctest_modes.md) that shows outcome of all `modes` for what to expect.
 
 Whichever mode it operates on, the output (in the console) can be copied and pasted
 to a doc editor (like LibreOffice Writer), and an api doc can be generated with very 
 minor editting. The file openscad_doctest_api.html servers as a good demo for this feature.
 
-The *unit test* feature helps to ensure quality, reduces maintainence burden, facilitate 
+The **unit test** feature helps to ensure quality, reduces maintainence burden, facilitate 
 re-factoring, and, my favorite, allows for **test-first** or **test-driven programming** (see <a href="http://en.wikipedia.org/wiki/Test-driven_development">test-driven development</a>), i.e., 
 write the expected outcome of a function first, then starts writing the code to see if it 
 behaves as expected. 
 
 ####2. Files included
 
+* openscad_doctest_modes.md    --- Demo all modes of doctest
 * openscad_doctest.scad        --- doctest() and utilities (see below)
 * openscad_doctest_help.scad   --- help and doc and tests
 * openscad_doctest_demo_1.scad --- demo of basics
@@ -45,7 +46,7 @@ behaves as expected.
 
 ####3. Quick Look
 
-Example function: 
+A quick work through for the flow of coding with example function: 
 ```java
 function addz(p,z)= [p.x, p.y, p.z+z];
 ```
@@ -102,8 +103,8 @@ addz_test( 13 );
 
 ####4. Console Output
 
-The output of **doctest()** depends on the value of option `mode`. For example,
-`mode=13` (type in this form: `["mode",13]`) , which is the full display of everything (See section **Doctest Modes** for details), gives this:
+The output of `doctest()` depends on the value of option `mode`. For example,
+`mode=13` (type in this form: `["mode",13]`) , which is the full display of everything (See section **Doctest Modes** for details, or [*openscad_doctest_modes.md*](https://github.com/runsun/openscad_doctest/blob/master/openscad_doctest_modes.md) for result of all modes), gives this:
 
 ```java
 -------------------------------------------------------
@@ -124,15 +125,16 @@ addz ( p,z )=array ( tested:3/failed:1 )
 ####5. Where to Start
 
  * Run *openscad_doctest_demo_1.scad* for a quick taste of basics.
- * Run **doctest_help(index)** in *openscad_doctest_help.scad* to display help
- * Run **doctest_tool_test(mode)** in *openscad_doctest_help.scad* for a
-   complete demo of testing all the unility functions that **doctest** uses.
+ * Checkout [*openscad_doctest_modes.md*](https://github.com/runsun/openscad_doctest/blob/master/openscad_doctest_modes.md) for what you can expect with different `modes`.
+ * Run `doctest_help(index)` in *openscad_doctest_help.scad* to display help
+ * Run `doctest_tool_test(mode)` in *openscad_doctest_help.scad* for a
+   complete demo of testing all the unility functions that `doctest` uses.
 
  Pick an `index` or `mode` according to the instructions displayed. 
 
 ####6. Doctest Modes
 
-Two main features of **doctest()**, *doc* and *testing*,  can be used together or
+Two main features of `doctest()`, *doc* and *testing*,  can be used together or
 separately by setting doctest's `mode` option to one of 8 possibilities. 
 Lets start with the *test-only* modes:
 
